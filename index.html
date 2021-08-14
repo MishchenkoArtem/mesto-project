@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Место</title>
+    <link rel="stylesheet" href="./pages/index.css">
+</head>
+<body class="page">
+    <header class="header">
+        <img src="./images/Header__logo.png" alt="Логотип" class="header__logo">
+        <div class="header__line"></div>
+    </header>
+    <main class="main">
+        <section class="profile">
+            <img src="./images/avatar.png" alt="Аватарка" class="profile__avatar">
+            <p class="profile__name">Жак-Ив Кусто
+                <a href="#popup" class="profile__edit-button"></a>
+            </p>
+            <p class="profile__info">Исследователь океана</p>
+            <a href="#" class="profile__add-button"></a>
+        </section>
+        <section>
+            <ul class="grid-list">
+                <li>
+                    <div class="grid-list__background">
+                        <img src="./images/architektura-eifelevoi-bashni.jpeg" alt="Эйфелева башня" class="grid-list__image">
+                        <div class="grid-list__container">
+                            <h1 class="grid-list__heading">Эйфелева башня</h1>
+                            <a href="#" class="grid-list__heart"></a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="grid-list__background">
+                        <img src="./images/Big_ban.jpeg" alt="Биг-Бен" class="grid-list__image">
+                        <div class="grid-list__container">
+                            <h1 class="grid-list__heading">Биг-Бен</h1>
+                            <a href="#" class="grid-list__heart"></a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="grid-list__background">
+                        <img src="./images/bashnya_posl.jpeg" alt="Пизанская башня" class="grid-list__image">
+                        <div class="grid-list__container">
+                            <h1 class="grid-list__heading">Пизанская башня</h1>
+                            <a href="#" class="grid-list__heart"></a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="grid-list__background">
+                        <img src="./images/galat_tower.jpeg" alt="Галатская башня" class="grid-list__image">
+                        <div class="grid-list__container">
+                            <h1 class="grid-list__heading">Галатская башня</h1>
+                            <a href="#" class="grid-list__heart"></a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="grid-list__background">
+                        <img src="./images/Отель_Парус.jpeg" alt="Отель Парус" class="grid-list__image">
+                        <div class="grid-list__container">
+                            <h1 class="grid-list__heading">Отель Парус</h1>
+                            <a href="#" class="grid-list__heart"></a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="grid-list__background">
+                        <img src="./images/Подземная_башня.jpeg" alt="Подземная башня в синтре" class="grid-list__image">
+                        <div class="grid-list__container">
+                            <h1 class="grid-list__heading">Подземная башня в синтре</h1>
+                            <a href="#" class="grid-list__heart"></a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <div id="popup" class="popup popup_opened">
+                <div class="popup__body">
+                    <div class="popup__container">
+                        <a href="#" class="popup__close"></a>
+                        <h2 class="popup__heading popup_type_indent-left">Редактировать профиль</h2>
+                        <fieldset class="popup__input-container">
+                            <label for="name">  <!-- В этом случае связывать ярлык с полем ввода необязательно, ведь они уже находятся в родстве.--> 
+                                <input id="name" type="text" value="Жак-Ив Кусто" placeholder="Имя" class="popup__item popup_type_indent-left"> <!--Валидатор ругается поэтому добавил id-->
+                            </label>
+                        </fieldset>
+                        <fieldset class="popup__input-container">
+                            <label for="about_me">
+                                <input id="about_me" type="text" value="Исследователь океана" placeholder="О себе" class="popup__item popup_type_indent-left">
+                            </label>
+                        </fieldset>
+                        <fieldset class="popup__input-container">
+                            <button type="submit" class="popup__button popup_type_indent-left">Сохранить</button>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <p class="footer__copyright">© 2020 Mesto Russia</p>
+    </footer>
+</body>
+</html>
