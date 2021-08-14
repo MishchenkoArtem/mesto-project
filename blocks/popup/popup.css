@@ -1,0 +1,15 @@
+.popup {
+    box-sizing: border-box;
+    background-color: rgb(0, 0, 0, 0.5);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    overflow: auto;
+    display: none;
+}
+
+.popup:target {
+    display: block; /* Насколько я понял так делать не нужно было, просто хотелось для души чтобы работало :) */
+}

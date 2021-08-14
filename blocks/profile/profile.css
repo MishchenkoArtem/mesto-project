@@ -1,0 +1,27 @@
+.profile {
+    max-width: 880px;
+    margin: 40px auto 0;
+    display: grid;
+    grid-template-columns: 150px 400px 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: 
+    "avatar name add-button"
+    "avatar info add-button";
+    row-gap: 16px;
+}
+
+@media (max-width: 768px) {
+    .profile {
+        max-width: 282px;
+        margin: 42px auto 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 52px 50px 50px;
+        grid-template-areas: 
+        "avatar"
+        "name"
+        "info"
+        "add-button";
+        row-gap: 0;
+    }
+}

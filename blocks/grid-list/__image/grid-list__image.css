@@ -1,0 +1,7 @@
+.grid-list__image {
+    max-width: 282px;
+    min-height: 282px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px 10px 0 0;
+}

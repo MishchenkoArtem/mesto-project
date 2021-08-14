@@ -1,0 +1,9 @@
+.grid-list__container {
+    margin: 0 auto;
+    max-width: 246px;
+    min-height: 23px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25px;
+}

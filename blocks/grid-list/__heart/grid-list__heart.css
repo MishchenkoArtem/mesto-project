@@ -1,0 +1,16 @@
+.grid-list__heart {
+    background-image: url(../../../images/heart.svg);
+    background-repeat: no-repeat;
+    min-width: 22px;
+    min-height: 19px;
+}
+
+.grid-list__heart:hover {
+    background-image: url(../../../images/heart__grey.svg);
+    transition: linear 0.3;
+}
+
+.grid-list__heart:active {
+    background-image: url(../../../images/heart__black.svg);
+    transition: linear 0.3;
+}

@@ -1,0 +1,23 @@
+.profile__add-button {
+    grid-area: add-button;
+    min-width: 150px;
+    min-height: 50px;
+    background-image: url(../../../images/Add\ Button.svg);
+    background-repeat: no-repeat;
+    align-self: center;
+    justify-self: flex-end;
+}
+
+.profile__add-button:hover {
+    opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+    .profile__add-button {
+        grid-area: add-button;
+        min-width: 282px;
+        background-image: url(../../../images/add\ button\ big.svg);
+        background-repeat: no-repeat;
+        justify-self: center;
+    }
+}
