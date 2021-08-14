@@ -70,7 +70,7 @@
                 </li>
                 <li>
                     <div class="grid-list__background">
-                        <img src="./images/Подземная башня.jpeg" alt="Подземная башня в синтре" class="grid-list__image">
+                        <img src="./images/Подземная_башня.jpeg" alt="Подземная башня в синтре" class="grid-list__image">
                         <div class="grid-list__container">
                             <h1 class="grid-list__heading">Подземная башня в синтре</h1>
                             <a href="#" class="grid-list__heart"></a>
@@ -86,13 +86,13 @@
                         <a href="#" class="popup__close"></a>
                         <h2 class="popup__heading popup_type_indent-left">Редактировать профиль</h2>
                         <fieldset class="popup__input-container">
-                            <label for="name">
-                                <input type="text" value="Жак-Ив Кусто" placeholder="Имя" class="popup__item popup_type_indent-left">
+                            <label for="name">  <!-- В этом случае связывать ярлык с полем ввода необязательно, ведь они уже находятся в родстве.--> 
+                                <input id="name" type="text" value="Жак-Ив Кусто" placeholder="Имя" class="popup__item popup_type_indent-left"> <!--Валидатор ругается поэтому добавил id-->
                             </label>
                         </fieldset>
                         <fieldset class="popup__input-container">
-                            <label for="about me">
-                                <input type="text" value="Исследователь океана" placeholder="О себе" class="popup__item popup_type_indent-left">
+                            <label for="about_me">
+                                <input id="about_me" type="text" value="Исследователь океана" placeholder="О себе" class="popup__item popup_type_indent-left">
                             </label>
                         </fieldset>
                         <fieldset class="popup__input-container">
