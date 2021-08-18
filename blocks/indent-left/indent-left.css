@@ -1,0 +1,9 @@
+.indent-left {
+    margin-left: 36px;
+}
+
+@media (max-width: 1279px) {
+    .indent-left {
+        margin-left: 22px;
+    }
+}

@@ -2,26 +2,27 @@
     max-width: 880px;
     margin: 40px auto 0;
     display: grid;
-    grid-template-columns: 150px 400px 1fr;
+    grid-template-columns: 150px 300px 1fr 1fr;
     grid-template-rows: repeat(2, 1fr);
     grid-template-areas: 
-    "avatar name add-button"
-    "avatar info add-button";
+    "avatar name edit-button add-button"
+    "avatar info . add-button";
     row-gap: 16px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1279px) {
     .profile {
         max-width: 282px;
+        width: 100%;
         margin: 42px auto 0;
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 50px;
         grid-template-rows: 1fr 52px 50px 50px;
         grid-template-areas: 
-        "avatar"
-        "name"
-        "info"
-        "add-button";
+        "avatar avatar"
+        "name edit-button"
+        "info info"
+        "add-button add-button";
         row-gap: 0;
     }
 }

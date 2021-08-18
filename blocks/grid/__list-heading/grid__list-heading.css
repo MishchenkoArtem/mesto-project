@@ -1,4 +1,4 @@
-.grid-list__heading {
+.grid__list-heading {
     font-weight: 900;
     font-size: 24px;
     line-height: 29px;
@@ -9,7 +9,3 @@
     white-space: nowrap;
     overflow: hidden;
 }
-
-
-  
-  
