@@ -10,15 +10,14 @@
 <body class="page">
     <header class="header">
         <img src="./images/Mesto_logo.svg" alt="Логотип" class="header__logo">
-        <div class="header__line"></div>
     </header>
     <main class="main">
         <section class="profile">
             <img src="./images/Avatar_profile.jpg" alt="Аватарка" class="profile__avatar">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button type="submit" class="profile__edit-button"></button>
+            <button type="button" class="profile__edit-button"></button>
             <p class="profile__info">Исследователь океана</p>
-            <a href="#" class="profile__add-button"></a>
+            <button type="button" class="profile__add-button"></button>
         </section>
         <section class="grid">
             <ul class="grid__list">
@@ -27,7 +26,7 @@
                         <img src="./images/architektura-eifelevoi-bashni.jpeg" alt="Эйфелева башня" class="grid__list-image">
                         <div class="grid__list-container">
                             <h2 class="grid__list-heading">Эйфелева башня</h2>
-                            <button type="submit" class="grid__list-heart"></button>
+                            <button type="button" class="grid__list-heart"></button>
                         </div>
                     </div>
                 </li>
@@ -36,7 +35,7 @@
                         <img src="./images/Big_ban.jpeg" alt="Биг-Бен" class="grid__list-image">
                         <div class="grid__list-container">
                             <h2 class="grid__list-heading">Биг-Бен</h2>
-                            <button type="submit" class="grid__list-heart"></button>
+                            <button type="button" class="grid__list-heart"></button>
                         </div>
                     </div>
                 </li>
@@ -45,7 +44,7 @@
                         <img src="./images/bashnya_posl.jpeg" alt="Пизанская башня" class="grid__list-image">
                         <div class="grid__list-container">
                             <h2 class="grid__list-heading">Пизанская башня</h2>
-                            <button type="submit" class="grid__list-heart"></button>
+                            <button type="button" class="grid__list-heart"></button>
                         </div>
                     </div>
                 </li>
@@ -54,7 +53,7 @@
                         <img src="./images/galat_tower.jpeg" alt="Галатская башня" class="grid__list-image">
                         <div class="grid__list-container">
                             <h2 class="grid__list-heading">Галатская башня</h2>
-                            <button type="submit" class="grid__list-heart"></button>
+                            <button type="button" class="grid__list-heart"></button>
                         </div>
                     </div>
                 </li>
@@ -63,7 +62,7 @@
                         <img src="./images/Отель_Парус.jpeg" alt="Отель Парус" class="grid__list-image">
                         <div class="grid__list-container">
                             <h2 class="grid__list-heading">Отель Парус</h2>
-                            <button type="submit" class="grid__list-heart"></button>
+                            <button type="button" class="grid__list-heart"></button>
                         </div>
                     </div>
                 </li>
@@ -72,7 +71,7 @@
                         <img src="./images/Подземная_башня.jpeg" alt="Подземная башня в синтре" class="grid__list-image">
                         <div class="grid__list-container">
                             <h2 class="grid__list-heading">Подземная башня в синтре</h2>
-                            <button type="submit" class="grid__list-heart"></button>
+                            <button type="button" class="grid__list-heart"></button>
                         </div>
                     </div>
                 </li>
@@ -85,17 +84,17 @@
     <section>
         <div class="popup popup_opened">
             <div class="popup__container">
-                <button type="submit" class="popup__close"></button>
+                <button type="button" class="popup__close"></button>
                 <h2 class="popup__heading indent-left">Редактировать профиль</h2>
-                <form action="" name="Форма">
+                <form action="" name="form">
                     <fieldset class="popup__input-container">
                         <label for="name">  <!-- В этом случае связывать ярлык с полем ввода необязательно, ведь они уже находятся в родстве.-->
-                            <input name="Имя" id="name" type="text" value="Жак-Ив Кусто" placeholder="Имя" class="popup__item indent-left"> <!--Валидатор ругается поэтому добавил id-->
+                            <input name="name" id="name" type="text" value="Жак-Ив Кусто" placeholder="Имя" class="popup__item indent-left"> <!--Валидатор ругается поэтому добавил id-->
                         </label>
                     </fieldset>
                     <fieldset class="popup__input-container">
                         <label for="about_me">
-                            <input name="О себе" id="about_me" type="text" value="Исследователь океана" placeholder="О себе" class="popup__item indent-left">
+                            <input name="about_me" id="about_me" type="text" value="Исследователь океана" placeholder="О себе" class="popup__item indent-left">
                         </label>
                     </fieldset>
                     <button type="submit" class="popup__button indent-left">Сохранить</button>

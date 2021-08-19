@@ -6,9 +6,6 @@
     width: 100%;
     left: 0;
     top: 0;
-    display: block;
-}
-
-.popup:target {
-    display: block; /* Насколько я понял так делать не нужно было, просто хотелось для души чтобы работало :) */
+    display: none;
+    margin: auto;
 }
