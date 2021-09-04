@@ -1,0 +1,13 @@
+.grid__delete-item {
+    background-image: url(../../../images/grid__delete-item.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-width: 18px;
+    min-height: 19px;
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    box-sizing: border-box;
+    background-color: transparent;
+    border: 0;
+}

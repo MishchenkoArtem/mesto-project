@@ -12,6 +12,7 @@
 @import url(../blocks/grid/grid.css);
 @import url(../blocks/grid/__list/grid__list.css);
 @import url(../blocks/grid/__list-background/grid__list-background.css);
+@import url(../blocks/grid/__delete-item/grid__delete-item.css);
 @import url(../blocks/grid/__list-image/grid__list-image.css);
 @import url(../blocks/grid/__list-container/grid__list-container.css);
 @import url(../blocks/grid/__list-heading/grid__list-heading.css);
