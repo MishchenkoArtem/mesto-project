@@ -1,22 +1,20 @@
 const profileEditButton = document.querySelector('.profile__edit-button');
-const profileAddButton = document.querySelector('.profile__add-button');
-const popupOpened = document.querySelector('.popup_opened');
-const popupAddOpened = document.querySelector('.popup__add-opened'); 
-const popupClose = document.querySelector('.popup__close');
-const popupAddClose = document.querySelector('.popup__add-close');
+const popup = document.querySelector('.popup');
 
-profileEditButton.addEventListener('click', function (){
-    popupOpened.classList.remove('popup_opened');
-})
+function popupOpened () {
+    popup.classList.remove('popup_opened');
+}
 
-popupClose.addEventListener('click', function () {
-    popupOpened.classList.add('popup_opened');
-})
+function popupClose () {
+    popup.classList.add('popup_opened');
+}
 
-profileAddButton.addEventListener('click', function () {
-    popupAddOpened.classList.remove('popup__add-opened');
-})
+profileEditButton.addEventListener('click', function () {
+    popupOpened(popup);
+});
 
-popupAddClose.addEventListener('click', function () {
-    popupAddOpened.classList.add('popup__add-opened');
+popup.addEventListener('click', function (event) {
+    if (event.target.classList.contains('popup__close') || (event.target.classList.contains('popup'))) {
+        popupClose(popup);
+    }
 })
