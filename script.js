@@ -18,3 +18,26 @@ popup.addEventListener('click', function (event) {
         popupClose(popup);
     }
 })
+
+const formElement = popup.querySelector('#profile_form');
+const nameInput = formElement.querySelector('#profile_name');
+const jobInput = formElement.querySelector('#profile_about-me');
+
+function formSubmitHandler (evt) {
+    evt.preventDefault();
+
+nameInput.value;
+jobInput.value;
+
+const profileName = document.querySelector('.profile__name');
+const profileInfo = document.querySelector('.profile__info');
+
+profileName.textContent = nameInput.value;
+profileInfo.textContent = jobInput.value;
+
+nameInput.value = '';
+jobInput.value = '';
+
+}
+
+formElement.addEventListener('submit', formSubmitHandler);
