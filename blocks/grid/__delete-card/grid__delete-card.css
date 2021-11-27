@@ -1,4 +1,4 @@
-.grid__delete-item {
+.grid__delete-card {
     background-image: url(../../../images/grid__delete-item.svg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -10,4 +10,5 @@
     box-sizing: border-box;
     background-color: transparent;
     border: 0;
+    cursor: pointer;
 }

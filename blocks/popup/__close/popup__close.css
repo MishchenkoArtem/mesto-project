@@ -2,7 +2,7 @@
     background-image: url(../../../images/Close\ Icon.svg);
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: transparent;
     max-width: 32px;
     width: 100%;
     max-height: 32px;
