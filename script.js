@@ -1,4 +1,6 @@
 const popupProfile = document.querySelector('.popup__profile');
+const profileName = document.querySelector('.profile__name');
+const profileInfo = document.querySelector('.profile__info');
 const popupCard = document.querySelector('.popup__card');
 const popupImage = document.querySelector('.popup__open-img');
 const cardTemplate = document.querySelector('.template__card').content;
@@ -38,24 +40,16 @@ const formProfileElement = popupProfile.querySelector('.popup__form');
 const nameInput = formProfileElement.querySelector('#profile_name');
 const jobInput = formProfileElement.querySelector('#profile_about-me');
 
-function formSubmitHandler(evt) {
+function editForm(evt) {
 	evt.preventDefault();
-
-	jobInput.value;
-	nameInput.value;
-
-	const profileName = document.querySelector('.profile__name');
-	const profileInfo = document.querySelector('.profile__info');
 
 	profileName.textContent = nameInput.value;
 	profileInfo.textContent = jobInput.value;
 
 	closePopup(popupProfile);
-	nameInput.value = '';
-	jobInput.value = '';
 }
 
-formProfileElement.addEventListener('submit', formSubmitHandler);
+formProfileElement.addEventListener('submit', editForm);
 
 const handleCardLikeClick = (event) => {
 	event.target.classList.toggle('grid__list-heart_type_active');
@@ -121,5 +115,9 @@ const cardForm = popupCard.querySelector('.popup__form').addEventListener('submi
 	const link = popupCard.querySelector('#address_image').value;
 
 	cardRender(cardList, cardCreate(title, link));
+	
+	popupCard.querySelector('#card_name').value = '';
+	popupCard.querySelector('#address_image').value = '';
+
 	closePopup(popupCard);
 });
