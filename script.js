@@ -1,8 +1,36 @@
-const popupProfile = document.querySelector('.popup_type_profile');
-const popupCard = document.querySelector('.popup_type_card');
-const popupImage = document.querySelector('.popup_type_image');
+const popupProfile = document.querySelector('.popup__profile');
+const popupCard = document.querySelector('.popup__card');
+const popupImage = document.querySelector('.popup__open-img');
 const cardTemplate = document.querySelector('.template__card').content;
 const cardList = document.querySelector('.grid__list');
+
+function openPopup (popup) {
+	popup.classList.add('popup_opened');
+};
+
+function closePopup (popup) {
+	popup.classList.remove('popup_opened');
+};
+
+document.querySelector('.profile__edit-button').addEventListener('click', () => {
+	openPopup(popupProfile);
+});
+
+popupProfile.querySelector('.popup__close').addEventListener('click', () => {
+	closePopup(popupProfile);
+});
+
+document.querySelector('.profile__add-button').addEventListener('click', () => {
+	openPopup(popupCard);
+});
+
+popupCard.querySelector('.popup__close').addEventListener('click', () => {
+	closePopup(popupCard);
+});
+
+popupImage.querySelector('.popup__close').addEventListener('click', () => {
+	closePopup(popupImage);
+});
 
 // Написать function для popup
 
