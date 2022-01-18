@@ -1,4 +1,4 @@
-.grid__list-heart {
+.card__heart {
     background-image: url(../../../images/heart.svg);
     background-color: #fff;
     background-repeat: no-repeat;
@@ -10,7 +10,7 @@
     cursor: pointer;
 }
 
-.grid__list-heart:hover {
+.card__heart:hover {
     opacity: .5;
     transition: linear 0.3;
 }

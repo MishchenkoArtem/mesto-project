@@ -8,7 +8,6 @@
     padding: 0;
     margin: 0;
     align-self: flex-end;
-    display: flex;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
