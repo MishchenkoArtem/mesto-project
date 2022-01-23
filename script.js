@@ -23,7 +23,7 @@ document.querySelector('.profile__edit-button').addEventListener('click', () => 
 	openPopup(popupProfile);
 });
 
-popupProfile.querySelector('.popup__close').addEventListener('click', () => {
+popupProfile.querySelector('.popup__close').addEventListener('click', (event) => {
 	closePopup(popupProfile);
 });
 
@@ -39,7 +39,20 @@ popupImage.querySelector('.popup__close').addEventListener('click', () => {
 	closePopup(popupImage);
 });
 
-const 
+const popupList = Array.from(document.querySelectorAll('.popup'));
+
+popupList.forEach((popup) => {
+	popup.addEventListener('click', (evt) => {
+		if (evt.target.classList.contains('popup')) {
+			closePopup(popup);
+		}
+	});
+	document.body.addEventListener('keydown', (evt) => {
+		if (evt.key === 'Escape') {
+			closePopup(popup);
+		}
+	});
+});
 
 function editForm(evt) {
 	evt.preventDefault();
