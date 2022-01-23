@@ -16,7 +16,6 @@
 
 .popup__close:hover {
     opacity: 0.8;
-    transition: linear 0.5s;
 }
 
 @media (max-width: 1279px) {
