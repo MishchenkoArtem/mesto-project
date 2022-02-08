@@ -1,32 +1,37 @@
+const popupList = Array.from(document.querySelectorAll('.popup'));
+
 import { profileName, 
 		profileInfo,
 		nameInput,
 		jobInput,
-		popupProfile } 
-		from './index.js';
+		popupProfile,
+		formProfileElement } 
+		from '../pages/index.js';
 
 export function openPopup (popup) {
 	popup.classList.add('popup_opened');
-
-	const popupList = Array.from(document.querySelectorAll('.popup'));
-
-	popupList.forEach((popup) => {
-		popup.addEventListener('click', (evt) => {
-			if (evt.target.classList.contains('popup')) {
-				closePopup(popup);
-			}
-		});
-		document.body.addEventListener('keydown', (evt) => {
-			if (evt.key === 'Escape') {
-				closePopup(popup);
-			}
-		});
-	});
+	document.addEventListener('keydown', handlClosePopupClick);
 };
 
 export function closePopup (popup) {
 	popup.classList.remove('popup_opened');
+	document.removeEventListener('keydown', handlClosePopupClick);
 };
+
+function handlClosePopupClick (event) {
+	const activePopup = document.querySelector('.popup_opened');
+  	if (activePopup && event.key === 'Escape') { 
+    	closePopup(activePopup);
+  	}
+}
+
+popupList.forEach((popup) => {
+	popup.addEventListener('click', (evt) => {
+		if (evt.target.classList.contains('popup')) {
+			closePopup(popup);
+		}
+	});
+});
 
 export function editForm (event) {
 	event.preventDefault();

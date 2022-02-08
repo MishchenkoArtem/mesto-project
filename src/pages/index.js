@@ -6,13 +6,13 @@ export const popupCard = document.querySelector('.popup__card');
 export const popupImage = document.querySelector('.popup__open-img');
 export const cardTemplate = document.querySelector('.template__card').content;
 export const cardList = document.querySelector('.card__list');
-const formProfileElement = document.forms.formProfile;
+export const formProfileElement = document.forms.formProfile;
 export const nameInput = document.forms.formProfile.nameProfile;
 export const jobInput = document.forms.formProfile.professionProfile;
 
 import { openPopup,
 		closePopup } 
-		from './modal.js';
+		from '../components/modal.js';
 
 import { initialCards,
 		handleCardLikeClick,
@@ -20,10 +20,10 @@ import { initialCards,
 		renderCard,
 		createCard,
 		artem }
-		from './card.js';
+		from '../components/card.js';
 
 import { editForm } 
-		from './modal.js';
+		from '../components/modal.js';
 
 import { validationConfig, 
 		showInputError, 
@@ -35,7 +35,7 @@ import { validationConfig,
 		toggleButtonState,
 		setEventListeners,
 		enableValidation } 
-		from './validate.js';
+		from '../components/validate.js';
 
 document.querySelector('.profile__edit-button').addEventListener('click', () => {
 	nameInput.value =  '';
