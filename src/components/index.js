@@ -12,7 +12,7 @@ export const jobInput = document.forms.formProfile.professionProfile;
 
 import { openPopup,
 		closePopup } 
-		from '../components/modal.js';
+		from './modal.js';
 
 import { initialCards,
 		handleCardLikeClick,
@@ -20,10 +20,10 @@ import { initialCards,
 		renderCard,
 		createCard,
 		artem }
-		from '../components/card.js';
+		from './card.js';
 
 import { editForm } 
-		from '../components/modal.js';
+		from './modal.js';
 
 import { validationConfig, 
 		showInputError, 
@@ -35,7 +35,7 @@ import { validationConfig,
 		toggleButtonState,
 		setEventListeners,
 		enableValidation } 
-		from '../components/validate.js';
+		from './validate.js';
 
 document.querySelector('.profile__edit-button').addEventListener('click', () => {
 	nameInput.value =  '';

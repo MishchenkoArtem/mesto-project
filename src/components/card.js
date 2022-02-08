@@ -2,7 +2,7 @@ import { cardTemplate,
         popupCard,
         cardList,
         popupImage } 
-        from '../pages/index.js';
+        from './index.js';
 
 import { closePopup,
         openPopup } 

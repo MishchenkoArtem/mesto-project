@@ -6,7 +6,7 @@ import { profileName,
 		jobInput,
 		popupProfile,
 		formProfileElement } 
-		from '../pages/index.js';
+		from './index.js';
 
 export function openPopup (popup) {
 	popup.classList.add('popup_opened');
