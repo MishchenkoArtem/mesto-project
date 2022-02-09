@@ -68,3 +68,13 @@ initialCards.forEach((item) => {
 popupCard.querySelector('.popup__form').addEventListener('submit', artem)
 
 enableValidation(validationConfig);
+
+fetch('https://mesto.nomoreparties.co/v1/plus-cohort-6', {
+	headers: {
+		authorization: '6d1f8b51-2184-4b24-a74b-b837295f6bd4'
+	}
+})
+
+.then((res) => {
+	console.log(res);
+})
