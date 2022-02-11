@@ -63,7 +63,7 @@ export const renderCard = (cardList, cardElement) => {
 
 
 
-export function artem (evt) {
+export function createAddCard (evt) {
     evt.preventDefault();
 
     const title = popupCard.querySelector('#card_name').value;
