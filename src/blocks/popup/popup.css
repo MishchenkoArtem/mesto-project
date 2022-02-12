@@ -10,4 +10,5 @@
     align-items: center;
     justify-content: center;
     visibility: hidden;
+    transition: visibility 0s, opacity 0.6s, linear;
 }

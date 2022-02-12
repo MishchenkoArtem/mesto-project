@@ -1,12 +1,6 @@
-import { cardTemplate,
-        popupCard,
-        cardList,
-        popupImage } 
-        from './index.js';
+import { cardTemplate, popupCard, cardList, popupImage, cardName, cardImage, formCardElement, popupPicture, popupPictureCaption, btnAddCard } from './index.js';
 
-import { closePopup,
-        openPopup } 
-        from './modal.js';
+import { closePopup, openPopup } from './utils.js';
 
 export const initialCards = [{
     name: 'Архыз',
@@ -46,9 +40,12 @@ export function createCard (title, link) {
 	cardImage.src = link;
 	cardImage.alt = title;
 	cardImage.addEventListener('click', function(event) {
-		popupImage.querySelector('.popup__image').src = event.target.src;
-		popupImage.querySelector('.popup__image').alt = event.target.alt;
-		popupImage.querySelector('.popup__title-image').textContent = event.target.closest('.card__background').querySelector('.card__heading').textContent;
+		// popupPicture.src = event.target.src;
+		// popupPicture.alt = event.target.alt;
+        popupPicture.src = link
+        popupPicture.alt = title
+        popupPictureCaption.textContent = title
+		//popupPictureCaption.textContent = event.target.closest('.card__background').querySelector('.card__heading').textContent;
 		openPopup(popupImage);
 	});
 	cardElement.querySelector('.card__heart').addEventListener('click', handleCardLikeClick);
@@ -61,18 +58,15 @@ export const renderCard = (cardList, cardElement) => {
     cardList.prepend(cardElement);
 };
 
-
-
 export function createAddCard (evt) {
     evt.preventDefault();
 
-    const title = popupCard.querySelector('#card_name').value;
-    const link = popupCard.querySelector('#card_image').value;
+    const title = cardName.value;
+    const link = cardImage.value;
 
     renderCard(cardList, createCard(title, link));
     
-    popupCard.querySelector('#card_name').value = '';
-    popupCard.querySelector('#card_image').value = '';
-
+    formCardElement.reset()
+    btnAddCard.classList.add('popup__button_inactive')
     closePopup(popupCard);
 };
