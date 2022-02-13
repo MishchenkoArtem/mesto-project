@@ -24,6 +24,8 @@ import { validationConfig, enableValidation } from './validate.js';
 
 import { openPopup, closePopup } from './utils.js';
 
+import { getAppInfo } from './api.js'
+
 document.querySelector('.profile__edit-button').addEventListener('click', () => {
 	nameInput.value = profileName.textContent
 	jobInput.value = profileInfo.textContent
@@ -56,15 +58,14 @@ popupCard.querySelector('.popup__form').addEventListener('submit', createAddCard
 
 enableValidation(validationConfig);
 
-const config = {
-    baseUrl: 'https://nomoreparties.co/v1/plus-cohort-6',
-    headers: {
-      Authorization: '6d1f8b51-2184-4b24-a74b-b837295f6bd4',
-      'Content-Type': 'application/json'
-    }
-};
-  
-const getResponseData = (res) => {
-    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
-};
-
+getAppInfo()
+	.then(([user, cards]) => {
+    	profileName.textContent = user.name;
+    	profileInfo.textContent = user.about;
+    	avatarElement.src = user.avatar;
+    	const initialCards = cards
+    	initialCards.forEach((cardData) => {
+      	cardList.prepend(createCard(cardData.name, cardData.link))
+    })
+})
+	.catch(err => console.log(err));

@@ -66,7 +66,8 @@ export function createAddCard (evt) {
 
     renderCard(cardList, createCard(title, link));
     
-    formCardElement.reset()
-    btnAddCard.classList.add('popup__button_inactive')
+    formCardElement.reset();
+    btnAddCard.classList.add('popup__button_inactive');
+    btnAddCard.setAttribute('disabled', true);
     closePopup(popupCard);
 };
