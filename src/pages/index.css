@@ -13,11 +13,13 @@
 @import url(../blocks/card/__list/card__list.css);
 @import url(../blocks/card/__background/card__background.css);
 @import url(../blocks/card/__delete/card__delete.css);
+@import url(../blocks/card/__delete/_hidden/card__delete_hidden.css);
 @import url(../blocks/card/__image/card__image.css);
 @import url(../blocks/card/__container/card__container.css);
 @import url(../blocks/card/__heading/card__heading.css);
 @import url(../blocks/card/__heart/card__heart.css);
 @import url(../blocks/card/__heart/_type/card__heart_type_active.css);
+@import url(../blocks/card/__likes-counter/card__likes-counter.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/popup.css);

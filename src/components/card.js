@@ -1,73 +1,96 @@
-import { cardTemplate, popupCard, cardList, popupImage, cardName, cardImage, formCardElement, popupPicture, popupPictureCaption, btnAddCard } from './index.js';
-
+import { deleteCard, newPostCard, removeLike, sendLike } from './api.js';
+import { btnAddCard, cardCounter, cardDelete, cardImage, cardLike, cardList, cardName, cardTemplate, formCardElement, popupCard, popupImage, popupPicture, popupPictureCaption } from './constants.js';
 import { closePopup, openPopup } from './utils.js';
 
-export const initialCards = [{
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-}, {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-}, {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-}, {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-}, {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-}, {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-}];
-
-export const handleCardLikeClick = (event) => {
-	event.target.classList.toggle('card__heart_type_active');
+export const handleCardLikeClick = (cardLike, cardId, cardCounter) => {
+	if (!cardLike.classList.contains('card__heart_type_active')) {
+        sendLike(cardId)
+		.then((cardData) => {
+        cardLike.classList.toggle('card__heart_type_active');
+        cardCounter.textContent = cardData.likes.length.toString()
+        })
+        	.catch((err) => {
+        	console.log(err)
+        });
+    } else {
+        removeLike(cardId)
+		.then((cardData) => {
+        cardLike.classList.toggle('card__heart_type_active');
+        cardCounter.textContent = cardData.likes.length.toString()
+        })
+        	.catch((err) => {
+        	console.log(err)
+        });
+    }
 };
 
-export const handleCardRemoveClick = (event) => {
-	event.target.closest('.card__background').remove();
+export const handleCardRemoveClick = (cardElement, cardId) => {
+	deleteCard(cardId)
+		.then(() => {
+			cardElement.remove();
+		})
+		.catch(err)
 };
 
-export function createCard (title, link) {
-	const cardElement = cardTemplate.querySelector('.card__background').cloneNode(true);
+// export function renderCard (cardList, cardElement) {
+//     cardList.prepend(cardElement);
+// };
 
-	cardElement.querySelector('.card__heading').textContent = title;
-	const cardImage = cardElement.querySelector('.card__image');
-
-
-	cardImage.src = link;
-	cardImage.alt = title;
-	cardImage.addEventListener('click', function(event) {
-		// popupPicture.src = event.target.src;
-		// popupPicture.alt = event.target.alt;
-        popupPicture.src = link
-        popupPicture.alt = title
-        popupPictureCaption.textContent = title
-		//popupPictureCaption.textContent = event.target.closest('.card__background').querySelector('.card__heading').textContent;
-		openPopup(popupImage);
-	});
-	cardElement.querySelector('.card__heart').addEventListener('click', handleCardLikeClick);
-	cardElement.querySelector('.card__delete').addEventListener('click', handleCardRemoveClick);
-
-	return cardElement;
+export function createAddCard (cardData, cardList, userId) {
+	renderCard(cardData, cardList, userId)
+	newPostCard(cardName.value, cardImage.value)
+    
+    formCardElement.reset()
+    btnAddCard.classList.add('popup__button_inactive')
+    btnAddCard.setAttribute('disabled', true)
+    closePopup(popupCard)
 }
 
-export const renderCard = (cardList, cardElement) => {
-    cardList.prepend(cardElement);
-};
+function renderCard (cardData, cardList, userId) {
+	const cardElement = createCard(cardData, userId)
+    cardList.prepend(cardElement)
+}
 
-export function createAddCard (evt) {
-    evt.preventDefault();
+export const createCard = (cardData, UserId) => {
+	const cardElement = cardTemplate.querySelector('.card__background').cloneNode(true);
 
-    const title = cardName.value;
-    const link = cardImage.value;
+	cardElement.querySelector('.card__heading').textContent = cardData.name;
+	const cardImage = cardElement.querySelector('.card__image');
 
-    renderCard(cardList, createCard(title, link));
-    
-    formCardElement.reset();
-    btnAddCard.classList.add('popup__button_inactive');
-    btnAddCard.setAttribute('disabled', true);
-    closePopup(popupCard);
+	cardImage.src = cardData.link;
+	cardImage.alt = cardData.name;
+	cardImage.addEventListener('click', function(e) {
+		e.preventDefault()
+
+        popupPicture.src = cardData.link;
+        popupPicture.alt = cardData.name;
+        popupPictureCaption.textContent = cardData.name;
+		openPopup(popupImage);
+	});
+
+	cardCounter.textContent = cardData.likes.length.toString();
+	const isLiked = Boolean(cardData.likes.find(user => user._id === UserId));
+	if (isLiked) {
+		cardLike.classList.add('card__heart_type_active');
+	} else {
+        cardLike.classList.remove('card__heart_type_active');
+    }
+
+	const cardId = cardData._id
+	cardLike.addEventListener('click', () => {
+		console.log('click')
+		handleCardLikeClick(cardLike, cardId, cardCounter)
+	});
+
+	const isOwner = cardData.owner._id;
+    if (cardId === isOwner) {
+        cardDelete.classList.add('card__delete_hidden');
+    }
+
+  	cardDelete.addEventListener('click', () => {
+		console.log('click')
+		handleCardRemoveClick(cardElement, cardId)
+	});
+
+	return cardElement;
 };
