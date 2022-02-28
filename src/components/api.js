@@ -40,13 +40,13 @@ export function profileUpdate (profileName, profileInfo) {
     .then(res => getResponseData(res))
 }
 
-export function newPostCard (name, link, ownerId) {
+export function newPostCard (cardName, cardImage, ownerId) {
     return fetch(`${config.baseUrl}/cards`, {
         method: 'POST',
         headers:config.headers,
         body: JSON.stringify ({
-            name: name,
-            link: link,
+            name: cardName,
+            link: cardImage,
             owner: ownerId
         })
     })
@@ -75,4 +75,15 @@ export const deleteCard = (cardId) => {
       headers: config.headers,
     })
     .then(res => getResponseData(res))
-  }
+}
+
+export const avatarUpdate = (avatar) => {
+    return fetch(`${config.baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: config.headers,
+      body: JSON.stringify ({
+        avatar: avatar
+      })
+    })
+    .then(res => getResponseData(res))
+}

@@ -1,6 +1,11 @@
 .profile__avatar {
-    max-width: 120px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     grid-area: avatar;
     justify-self: center;
+}
+
+.profile__avatar:hover + .profile__edit-avatar {
+    visibility: visible;
 }

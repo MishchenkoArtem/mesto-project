@@ -1,9 +1,9 @@
 import '../pages/index.css';
-import { editForm } from './modal.js';
-import { createCard, createAddCard } from './card.js';
+import { changeAvatar, editForm } from './modal.js';
+import { createCard } from './card.js';
 import { validationConfig, enableValidation } from './validate.js';
 import { openPopup, closePopup } from './utils.js';
-import { cardList, formProfileElement, jobInput, nameInput, popupCard, popupImage, popupProfile, profileInfo, profileName } from './constants';
+import { cardList, formAvatarElement, formProfileElement, jobInput, nameInput, popupAvatar, popupCard, popupImage, popupProfile, profileInfo, profileName } from './constants';
 import { getAppInfo } from './api.js';
 
 document.querySelector('.profile__edit-button').addEventListener('click', () => {
@@ -28,7 +28,17 @@ popupImage.querySelector('.popup__close').addEventListener('click', () => {
 	closePopup(popupImage);
 });
 
+document.querySelector('.profile__edit-avatar').addEventListener('click', () => {
+	openPopup(popupAvatar);
+});
+
+popupAvatar.querySelector('.popup__close').addEventListener('click', () => {
+	closePopup(popupAvatar);
+});
+
 formProfileElement.addEventListener('submit', editForm);
+
+formAvatarElement.addEventListener('submit', changeAvatar);
 
 getAppInfo()
 	.then(([user, cards]) => {
@@ -40,7 +50,5 @@ getAppInfo()
     })
 })
   	.catch(err => console.log(err));
-
-popupCard.querySelector('.popup__form').addEventListener('submit', createAddCard)
 
 enableValidation(validationConfig);

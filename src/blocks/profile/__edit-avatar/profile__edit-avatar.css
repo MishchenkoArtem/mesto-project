@@ -1,0 +1,24 @@
+.profile__edit-avatar {
+    background-image: url(../../../images/pencil.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 120px;
+    height: 120px;
+    grid-area: avatar;
+    z-index: 1;
+    margin: 0 0 0 15px;
+    visibility: hidden;
+    cursor: pointer;
+}
+
+.profile__edit-avatar:hover {
+    visibility: visible;
+}
+
+@media (max-width: 920px) {
+    .profile__edit-avatar {
+        margin: 0 0 0 81px;
+    }
+}

@@ -1,5 +1,5 @@
 import { deleteCard, newPostCard, removeLike, sendLike } from './api.js';
-import { btnAddCard, cardCounter, cardDelete, cardImage, cardLike, cardList, cardName, cardTemplate, formCardElement, popupCard, popupImage, popupPicture, popupPictureCaption } from './constants.js';
+import { btnAddCard, cardImage, cardList, cardName, cardTemplate, formCardElement, popupCard, popupImage, popupPicture, popupPictureCaption } from './constants.js';
 import { closePopup, openPopup } from './utils.js';
 
 export const handleCardLikeClick = (cardLike, cardId, cardCounter) => {
@@ -29,22 +29,29 @@ export const handleCardRemoveClick = (cardElement, cardId) => {
 		.then(() => {
 			cardElement.remove();
 		})
-		.catch(err)
+		.catch(err => console.log(err));
 };
 
-// export function renderCard (cardList, cardElement) {
-//     cardList.prepend(cardElement);
-// };
+let userId = null
 
-export function createAddCard (cardData, cardList, userId) {
-	renderCard(cardData, cardList, userId)
-	newPostCard(cardName.value, cardImage.value)
-    
-    formCardElement.reset()
-    btnAddCard.classList.add('popup__button_inactive')
-    btnAddCard.setAttribute('disabled', true)
-    closePopup(popupCard)
-}
+formCardElement.addEventListener('submit', function(e) {
+    e.preventDefault();
+    btnAddCard.textContent = 'Сохранение...';
+    newPostCard(cardName.value, cardImage.value)
+    .then((cardData) => {
+        renderCard(cardData, cardList, userId)
+        formCard.reset();
+        btnAddCard.classList.add('popup__button_inactive');
+        btnAddCard.setAttribute('disabled', true);
+        closePopup(popupCard);
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+    .finally(() => {
+        btnAddCard.textContent = 'Создать';
+    })
+});
 
 function renderCard (cardData, cardList, userId) {
 	const cardElement = createCard(cardData, userId)
@@ -56,7 +63,9 @@ export const createCard = (cardData, UserId) => {
 
 	cardElement.querySelector('.card__heading').textContent = cardData.name;
 	const cardImage = cardElement.querySelector('.card__image');
-
+	const cardLike = cardElement.querySelector('.card__heart');
+	const cardCounter = cardElement.querySelector('.card__likes-counter');
+	const cardDelete = cardElement.querySelector('.card__delete');
 	cardImage.src = cardData.link;
 	cardImage.alt = cardData.name;
 	cardImage.addEventListener('click', function(e) {
@@ -78,7 +87,6 @@ export const createCard = (cardData, UserId) => {
 
 	const cardId = cardData._id
 	cardLike.addEventListener('click', () => {
-		console.log('click')
 		handleCardLikeClick(cardLike, cardId, cardCounter)
 	});
 
@@ -88,7 +96,6 @@ export const createCard = (cardData, UserId) => {
     }
 
   	cardDelete.addEventListener('click', () => {
-		console.log('click')
 		handleCardRemoveClick(cardElement, cardId)
 	});
 
