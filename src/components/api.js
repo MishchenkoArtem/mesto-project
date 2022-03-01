@@ -32,7 +32,7 @@ export function profileUpdate (profileName, profileInfo) {
     return fetch(`${config.baseUrl}/users/me`, {
         method: 'PATCH',
         headers: config.headers,
-        body: JSON.stringify({
+        body: JSON.stringify ({
             name: profileName,
             about: profileInfo
         })
@@ -53,7 +53,7 @@ export function newPostCard (cardName, cardImage, ownerId) {
     .then(res => getResponseData(res))
 }
 
-export const sendLike = (like) => {
+export function sendLike (like) {
     return fetch (`${config.baseUrl}/cards/likes/${like}`, {
       method: 'PUT',
       headers: config.headers,
@@ -61,7 +61,7 @@ export const sendLike = (like) => {
     .then(res => getResponseData(res))
 }
   
-export const removeLike = (like) => {
+export function removeLike (like) {
     return fetch (`${config.baseUrl}/cards/likes/${like}`, {
         method: 'DELETE',
         headers: config.headers,
@@ -69,7 +69,7 @@ export const removeLike = (like) => {
     .then(res => getResponseData(res))
 }
 
-export const deleteCard = (cardId) => {
+export function deleteCard (cardId) {
     return fetch (`${config.baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
       headers: config.headers,
@@ -77,7 +77,7 @@ export const deleteCard = (cardId) => {
     .then(res => getResponseData(res))
 }
 
-export const avatarUpdate = (avatar) => {
+export function avatarUpdate (avatar) {
     return fetch(`${config.baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: config.headers,

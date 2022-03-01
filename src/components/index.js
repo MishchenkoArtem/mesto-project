@@ -3,7 +3,7 @@ import { changeAvatar, editForm } from './modal.js';
 import { createCard } from './card.js';
 import { validationConfig, enableValidation } from './validate.js';
 import { openPopup, closePopup } from './utils.js';
-import { cardList, formAvatarElement, formProfileElement, jobInput, nameInput, popupAvatar, popupCard, popupImage, popupProfile, profileInfo, profileName } from './constants';
+import { cardList, formAvatarElement, formProfileElement, jobInput, nameInput, popupAvatar, popupCard, popupImage, popupProfile, profileAvatar, profileInfo, profileName } from './constants';
 import { getAppInfo } from './api.js';
 
 document.querySelector('.profile__edit-button').addEventListener('click', () => {
@@ -44,6 +44,7 @@ getAppInfo()
 	.then(([user, cards]) => {
     	profileName.textContent = user.name;
     	profileInfo.textContent = user.about;
+		profileAvatar.src = user.avatar;
 		const userData = user._id
     	cards.forEach((cardData) => {
       	cardList.prepend(createCard(cardData, userData));

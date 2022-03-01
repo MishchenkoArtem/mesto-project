@@ -22,7 +22,7 @@ export function changeAvatar(e) {
 	avatarUpdate(avatarInput.value)
 		.then(() => {
 	  		formAvatarElement.reset();
-	  		btnSaveAvatar.classList.add('popup__button_inactive')
+	  		btnSaveAvatar.classList.add('popup__button_inactive');
 	  		btnSaveAvatar.setAttribute('disabled', true);
 	  		closePopup(popupAvatar);
 	})

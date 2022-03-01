@@ -1,6 +1,7 @@
 export const popupProfile = document.querySelector('.popup__profile');
 export const profileName = document.querySelector('.profile__name');
 export const profileInfo = document.querySelector('.profile__info');
+export const profileAvatar = document.querySelector('.profile__avatar');
 export const popupCard = document.querySelector('.popup__card');
 export const btnAddCard = popupCard.querySelector('.popup__button');
 export const popupImage = document.querySelector('.popup__open-img');
