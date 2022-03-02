@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Место</title>
 </head>
+
 <body class="page">
     <header class="header">
         <img src="<%=require('./images/mesto-logo.svg')%>" alt="Логотип" class="header__logo">
@@ -21,7 +23,7 @@
         </section>
         <section class="card">
             <div class="card__list">
-                
+
             </div>
         </section>
     </main>
@@ -36,13 +38,15 @@
                 <form name="formProfile" tabindex="-1" class="popup__form" novalidate>
                     <fieldset class="popup__input-container">
                         <label for="name">
-                            <input class="popup__input" id="profile_name" name="nameProfile" type="text" value="" placeholder="Имя" minlength="2" maxlength="40" required>
+                            <input class="popup__input" id="profile_name" name="nameProfile" type="text" value=""
+                                placeholder="Имя" minlength="2" maxlength="40" required>
                             <span class="popup__input-error" id="error-profile_name"></span>
                         </label>
                     </fieldset>
                     <fieldset class="popup__input-container">
                         <label for="profession">
-                            <input class="popup__input" id="profile_profession" name="professionProfile" type="text" value="" placeholder="О себе" minlength="2" maxlength="200" required>
+                            <input class="popup__input" id="profile_profession" name="professionProfile" type="text"
+                                value="" placeholder="О себе" minlength="2" maxlength="200" required>
                             <span class="popup__input-error" id="error-profile_profession"></span>
                         </label>
                     </fieldset>
@@ -59,13 +63,15 @@
                 <form name="formCard" class="popup__form" novalidate>
                     <fieldset class="popup__input-container">
                         <label for="cardName">
-                            <input class="popup__input" id="card_name" name="cardName" type="text" value="" placeholder="Название" minlength="2" maxlength="30" required>
+                            <input class="popup__input" id="card_name" name="cardName" type="text" value=""
+                                placeholder="Название" minlength="2" maxlength="30" required>
                             <span class="popup__input-error" id="error-card_name"></span>
                         </label>
                     </fieldset>
                     <fieldset class="popup__input-container">
                         <label for="card_image">
-                            <input class="popup__input" id="card_image" name="cardImage" type="url" value="" placeholder="Ссылка на картинку" required>
+                            <input class="popup__input" id="card_image" name="cardImage" type="url" value=""
+                                placeholder="Ссылка на картинку" required>
                             <span class="popup__input-error" id="error-card_image"></span>
                         </label>
                     </fieldset>
@@ -91,7 +97,8 @@
                 <form name="formAvatar" class="popup__form" novalidate>
                     <fieldset class="popup__input-container">
                         <label for="avatar">
-                            <input class="popup__input" id="avatar" name="avatar" type="text" value="" placeholder="" minlength="2" maxlength="" required>
+                            <input class="popup__input" id="avatar" name="avatar" type="text" value="" placeholder=""
+                                minlength="2" maxlength="" required>
                             <span class="popup__input-error" id="error-avatar"></span>
                         </label>
                     </fieldset>
@@ -114,4 +121,5 @@
         </div>
     </template>
 </body>
+
 </html>

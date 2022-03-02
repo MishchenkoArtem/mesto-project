@@ -1,33 +1,48 @@
-import { avatarUpdate, profileUpdate } from './api.js';
-import { avatarInput, btnSaveAvatar, formAvatarElement, jobInput, nameInput, popupAvatar, popupProfile, profileInfo, profileName } from './constants.js';
-import { closePopup } from './utils.js';
+import { avatarUpdate, profileUpdate } from "./api.js";
+import {
+  avatarInput,
+  btnEditProfile,
+  btnSaveAvatar,
+  formAvatarElement,
+  jobInput,
+  nameInput,
+  popupAvatar,
+  popupProfile,
+  profileAvatar,
+  profileInfo,
+  profileName,
+} from "./constants.js";
+import { closePopup } from "./utils.js";
 
-export function editForm (e) {
-	e.preventDefault();
-
-	profileName.textContent = nameInput.value;
-	profileInfo.textContent = jobInput.value;
-
-	profileUpdate(nameInput.value, jobInput.value);
-
-	closePopup(popupProfile);
+export function editForm(e) {
+  e.preventDefault();
+  btnEditProfile.textContent = "Сохранение...";
+  profileUpdate(nameInput.value, jobInput.value)
+    .then(() => {
+      profileName.textContent = nameInput.value;
+      profileInfo.textContent = jobInput.value;
+      closePopup(popupProfile);
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      btnEditProfile.textContent = "Сохранить";
+    });
 }
 
 export function changeAvatar(e) {
-	e.preventDefault();
+  e.preventDefault();
 
-	const avatar = document.querySelector('.profile__avatar');
-	avatar.src = avatarInput.value;
-	btnSaveAvatar.textContent = 'Сохранение...';
-	avatarUpdate(avatarInput.value)
-		.then(() => {
-	  		formAvatarElement.reset();
-	  		btnSaveAvatar.classList.add('popup__button_inactive');
-	  		btnSaveAvatar.setAttribute('disabled', true);
-	  		closePopup(popupAvatar);
-	})
-		.catch(err => console.log(err))
-		.finally(() => {
-			btnSaveAvatar.textContent = 'Сохранить';
-		})
+  btnSaveAvatar.textContent = "Сохранение...";
+  avatarUpdate(avatarInput.value)
+    .then(() => {
+      profileAvatar.src = avatarInput.value;
+      formAvatarElement.reset();
+      btnSaveAvatar.classList.add("popup__button_inactive");
+      btnSaveAvatar.setAttribute("disabled", true);
+      closePopup(popupAvatar);
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      btnSaveAvatar.textContent = "Сохранить";
+    });
 }
