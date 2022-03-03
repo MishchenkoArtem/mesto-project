@@ -20,18 +20,14 @@ export const handleCardLikeClick = (cardLike, cardId, cardCounter) => {
         cardLike.classList.toggle("card__heart_type_active");
         cardCounter.textContent = cardData.likes.length.toString();
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(err => console.log(err));
   } else {
     removeLike(cardId)
       .then((cardData) => {
         cardLike.classList.toggle("card__heart_type_active");
         cardCounter.textContent = cardData.likes.length.toString();
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(err => console.log(err));
   }
 };
 
@@ -40,7 +36,7 @@ export const handleCardRemoveClick = (cardElement, cardId) => {
     .then(() => {
       cardElement.remove();
     })
-    .catch((err) => console.log(err));
+    .catch(err => console.log(err));
 };
 
 let userId = null;
@@ -69,7 +65,7 @@ function renderCard(cardData, cardList, userId) {
   cardList.prepend(cardElement);
 }
 
-export const createCard = (cardData, UserId) => {
+export const createCard = (cardData, userId) => {
   const cardElement = cardTemplate
     .querySelector(".card__background")
     .cloneNode(true);
@@ -91,7 +87,7 @@ export const createCard = (cardData, UserId) => {
   });
 
   cardCounter.textContent = cardData.likes.length.toString();
-  const isLiked = Boolean(cardData.likes.find((user) => user._id === UserId));
+  const isLiked = Boolean(cardData.likes.find((user) => user._id === userId));
   if (isLiked) {
     cardLike.classList.add("card__heart_type_active");
   } else {
@@ -104,8 +100,8 @@ export const createCard = (cardData, UserId) => {
   });
 
   const isOwner = cardData.owner._id;
-  if (cardId === isOwner) {
-    cardDelete.classList.add("card__delete_hidden");
+  if (userId === isOwner) {
+    cardDelete.classList.add("card__delete_visible");
   }
 
   cardDelete.addEventListener("click", () => {
