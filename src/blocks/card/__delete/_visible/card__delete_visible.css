@@ -1,4 +1,3 @@
 .card__delete_visible {
-    visibility: visible;
-    cursor: pointer;
+    visibility: hidden;
 }

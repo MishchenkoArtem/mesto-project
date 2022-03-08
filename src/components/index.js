@@ -57,16 +57,4 @@ formProfileElement.addEventListener("submit", editForm);
 
 formAvatarElement.addEventListener("submit", changeAvatar);
 
-getAppInfo()
-  .then(([user, cards]) => {
-    profileName.textContent = user.name;
-    profileInfo.textContent = user.about;
-    profileAvatar.src = user.avatar;
-    const userData = user._id;
-    cards.forEach((cardData) => {
-      cardList.prepend(createCard(cardData, userData));
-    });
-  })
-  .catch((err) => console.log(err));
-
 enableValidation(validationConfig);

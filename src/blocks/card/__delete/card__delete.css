@@ -10,5 +10,5 @@
     box-sizing: border-box;
     background-color: transparent;
     border: 0;
-    visibility: hidden;
+    cursor: pointer;
 }
