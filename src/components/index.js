@@ -3,8 +3,8 @@ import { changeAvatar, editForm } from "./modal.js";
 import { createCard } from "./card.js";
 import { validationConfig, enableValidation } from "./validate.js";
 import { openPopup, closePopup } from "./utils.js";
+import { getAppInfo } from "./api.js";
 import {
-  cardList,
   formAvatarElement,
   formProfileElement,
   jobInput,
@@ -13,11 +13,11 @@ import {
   popupCard,
   popupImage,
   popupProfile,
-  profileAvatar,
   profileInfo,
   profileName,
+  profileAvatar,
+  cardList,
 } from "./constants";
-import { getAppInfo } from "./api.js";
 
 document
   .querySelector(".profile__edit-button")
@@ -42,6 +42,19 @@ popupCard.querySelector(".popup__close").addEventListener("click", () => {
 popupImage.querySelector(".popup__close").addEventListener("click", () => {
   closePopup(popupImage);
 });
+
+getAppInfo()
+  .then(([user, cards]) => {
+    profileName.textContent = user.name;
+    profileInfo.textContent = user.about;
+    profileAvatar.src = user.avatar;
+    const userData = user._id;
+    const initialCards = cards;
+    initialCards.forEach((cardData) => {
+      cardList.prepend(createCard(cardData, userData));
+    });
+  })
+  .catch((err) => console.log(err));
 
 document
   .querySelector(".profile__edit-avatar")

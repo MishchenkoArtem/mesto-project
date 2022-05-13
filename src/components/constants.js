@@ -20,3 +20,4 @@ export const cardName = document.forms.formCard.cardName;
 export const cardImage = document.forms.formCard.cardImage;
 export const formAvatarElement = document.forms.formAvatar;
 export const avatarInput = document.forms.formAvatar.avatar;
+export let userId = null;
