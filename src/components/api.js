@@ -170,3 +170,11 @@ export function avatarUpdate(avatar) {
     }).then((res) => this.getResponseData(res));
   }
 } */
+
+/* const api = new Api ({
+  baseUrl: "https://nomoreparties.co/v1/plus-cohort-9",
+  headers: {
+    Authorization: "0ce4a23a-1bec-4586-80d1-c87f648e62fc",
+    "Content-Type": "application/json",
+  },
+}); */
