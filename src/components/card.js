@@ -86,10 +86,11 @@ export const createCard = ({ name, link, likes, owner: ownerId, _id: idCard }, u
   });
 
   // Добавление корзины для карточки
-  const isOwner = ownerId._id;
-  if (userId !== isOwner) {
+  const isOwner = ownerId._id
+  if (isOwner === userId) {
     cardDelete.classList.add("card__delete_visible");
   }
+  
   // Удаление карточки
   cardDelete.addEventListener("click", () => {
     handleCardRemoveClick(cardElement, cardId);
@@ -100,12 +101,11 @@ export const createCard = ({ name, link, likes, owner: ownerId, _id: idCard }, u
 
 // ---------------------------------------------------------------------------------Функция отображения карточки
 function renderCard(cardData, cardList, userId) {
-  console.log(userId);
   const cardElement = createCard(cardData, userId);
   cardList.prepend(cardElement);
 }
 
-// ------------------------------------------------------------------------------ Функция добавления и счета лайков 
+// ------------------------------------------------------------------------------ Функция добавления и счета лайков
 export const handleCardLikeClick = (cardLike, cardId, cardCounter) => {
   if (!cardLike.classList.contains("card__heart_type_active")) {
     
