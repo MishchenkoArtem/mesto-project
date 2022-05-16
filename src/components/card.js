@@ -133,3 +133,27 @@ export const handleCardRemoveClick = (cardElement, cardId) => {
     })
     .catch((err) => console.log(err));
 };
+
+/* class Card {
+  constructor({name, link, likes, owner, _id: cardId}, userId, selector) {
+    this._name = name;
+    this._link = link;
+    this._likes = likes;
+    this._ownerId = owner._id;
+    this._cardid = _id;
+    this._userId = userId;
+    this._selector = selector;
+  }
+
+  _getElement {
+    const cardElement = document
+    .querySelector('template__card')
+    .content
+    .querySelector('card__background')
+    .cloneNode(true);
+
+    return cardElement;
+  }
+}
+
+const card = new Card; */
