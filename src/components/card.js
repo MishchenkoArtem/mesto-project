@@ -1,5 +1,6 @@
 import {
   deleteCard,
+  getAppInfo,
   newPostCard,
   removeLike,
   sendLike,
@@ -146,7 +147,7 @@ export const handleCardRemoveClick = (cardElement, cardId) => {
   }
 
   // Метод обработки селектора
-  _getElement {
+  _getElement() {
     const cardElement = document
     .querySelector(this._selector)
     .content
@@ -157,7 +158,7 @@ export const handleCardRemoveClick = (cardElement, cardId) => {
   }
 
   // Метод создания карточки
-  generate {
+  generate() {
     this._element = this._getElement();
     this._setEventListener();
 
@@ -171,20 +172,20 @@ export const handleCardRemoveClick = (cardElement, cardId) => {
   }
 
   // Метод слушатель событий
-  _setEventListener {
+  _setEventListener() {
     this._element.querySelector('.card__heart').addEventListener('click', () => {
       this._handleLikeClick();
     });
   }
 
   // Метод добавления и удаления лайков
-  _handleLikeClick {
+  _handleLikeClick() {
     this._element.querySelector('.card__heart').classList.toggle('.card__heart_type_active');
   }
 }
 
 // Перебор и создание карточек
-const cardList.forEach((item) => {
+getAppInfo.forEach((item) => {
   const card = new Card(item, '.template__card');
   const cardElement = card.generate();
 

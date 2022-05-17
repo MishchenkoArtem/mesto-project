@@ -1,6 +1,6 @@
 import "../pages/index.css";
 import { changeAvatar, editForm } from "./modal.js";
-import { createCard } from "./card.js";
+import { createCard, Card } from "./card.js";
 import { validationConfig, enableValidation } from "./validate.js";
 import { openPopup, closePopup } from "./utils.js";
 import { getAppInfo } from "./api.js";
