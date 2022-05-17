@@ -154,6 +154,23 @@ export const handleCardRemoveClick = (cardElement, cardId) => {
 
     return cardElement;
   }
+
+  generate {
+    this._element = this._getElement();
+
+    this._element.querySelector('.card__heading').textContent = this._name;
+    this._element.querySelector('.card__image').src = this._link;
+    this._element.querySelector('.card__heart');
+    this._element.querySelector('.card__likes-counter');
+    this._element.querySelector('.card__delete');
+
+    return this._element;
+  }
 }
 
-const card = new Card; */
+const cardList.forEach((item) => {
+  const card = new Card(item.name, item.link);
+  const cardElement = card.generate();
+
+  document.body.prepend(cardElement);
+}) */
