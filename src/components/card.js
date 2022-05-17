@@ -145,9 +145,10 @@ export const handleCardRemoveClick = (cardElement, cardId) => {
     this._selector = selector;
   }
 
+  // Метод обработки селектора
   _getElement {
     const cardElement = document
-    .querySelector('template__card')
+    .querySelector(this._selector)
     .content
     .querySelector('card__background')
     .cloneNode(true);
@@ -155,8 +156,10 @@ export const handleCardRemoveClick = (cardElement, cardId) => {
     return cardElement;
   }
 
+  // Метод создания карточки
   generate {
     this._element = this._getElement();
+    this._setEventListener();
 
     this._element.querySelector('.card__heading').textContent = this._name;
     this._element.querySelector('.card__image').src = this._link;
@@ -166,10 +169,23 @@ export const handleCardRemoveClick = (cardElement, cardId) => {
 
     return this._element;
   }
+
+  // Метод слушатель событий
+  _setEventListener {
+    this._element.querySelector('.card__heart').addEventListener('click', () => {
+      this._handleLikeClick();
+    });
+  }
+
+  // Метод добавления и удаления лайков
+  _handleLikeClick {
+    this._element.querySelector('.card__heart').classList.toggle('.card__heart_type_active');
+  }
 }
 
+// Перебор и создание карточек
 const cardList.forEach((item) => {
-  const card = new Card(item.name, item.link);
+  const card = new Card(item, '.template__card');
   const cardElement = card.generate();
 
   document.body.prepend(cardElement);
