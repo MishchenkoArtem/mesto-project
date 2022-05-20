@@ -135,7 +135,7 @@ export const handleCardRemoveClick = (cardElement, cardId) => {
     .catch((err) => console.log(err));
 };
 
-/* class Card {
+/* export class Card {
   constructor({name, link, likes, owner, _id: cardId}, userId, selector) {
     this._name = name;
     this._link = link;
