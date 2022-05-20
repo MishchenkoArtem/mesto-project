@@ -1,6 +1,6 @@
 import "../pages/index.css";
 import { changeAvatar, editForm } from "./modal.js";
-import { createCard, Card } from "./card.js";
+import { createCard } from "./card.js";
 import { validationConfig, enableValidation } from "./validate.js";
 import { openPopup, closePopup } from "./utils.js";
 import { getAppInfo } from "./api.js";
@@ -55,6 +55,28 @@ getAppInfo()
     });
   })
   .catch((err) => console.log(err));
+
+/* getAppInfo()
+  .then(([user, cards]) => {
+    profileName.textContent = user.name;
+    profileInfo.textContent = user.about;
+    profileAvatar.src = user.avatar;
+    const userData = user._id;
+    const arrayCards = cards;
+    const initialCards = new Section(
+      {
+        data: arrayCards,
+        renderer: (cardItem) => {
+          const card = new Card(cardItem, ".template__card");
+          const cardElement = card.generate();
+
+          cardsList.setItem(cardElement);
+        },
+      },
+      arrayCards
+    );
+  })
+  .catch((err) => console.log(err)); */
 
 document
   .querySelector(".profile__edit-avatar")
