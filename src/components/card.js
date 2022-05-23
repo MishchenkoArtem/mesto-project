@@ -4,7 +4,7 @@ import {
   newPostCard,
   removeLike,
   sendLike,
-} from "./api.js";
+} from "./Api.js";
 
 import {
   btnAddCard,
@@ -26,26 +26,26 @@ import {
 } from "./utils.js";
 
 // ---------------------------------------------------------------------------- Форма создания карточки
-formCardElement.addEventListener("submit", function (e) {
-  e.preventDefault();
+// formCardElement.addEventListener("submit", function (e) {
+//   e.preventDefault();
 
-  btnAddCard.textContent = "Сохранение...";
+//   btnAddCard.textContent = "Сохранение...";
   
-  newPostCard(cardName.value, cardImage.value)
-    .then((cardData) => {
-      renderCard(cardData, cardList, userId);
-      formCard.reset();
-      btnAddCard.classList.add("popup__button_inactive");
-      btnAddCard.setAttribute("disabled", true);
-      closePopup(popupCard);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
-      btnAddCard.textContent = "Создать";
-    });
-});
+//   newPostCard(cardName.value, cardImage.value)
+//     .then((cardData) => {
+//       renderCard(cardData, cardList, userId);
+//       formCard.reset();
+//       btnAddCard.classList.add("popup__button_inactive");
+//       btnAddCard.setAttribute("disabled", true);
+//       closePopup(popupCard);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     })
+//     .finally(() => {
+//       btnAddCard.textContent = "Создать";
+//     });
+// });
 
 // ---------------------------------------------------------------------------- Функция создания карточки
 /* export const createCard = ({ name, link, likes, owner: ownerId, _id: idCard }, userId) => {
@@ -107,43 +107,42 @@ formCardElement.addEventListener("submit", function (e) {
 } */
 
 // ------------------------------------------------------------------------------ Функция добавления и счета лайков
-export const handleCardLikeClick = (cardLike, cardId, cardCounter) => {
-  if (!cardLike.classList.contains("card__heart_type_active")) {
+// export const handleCardLikeClick = (cardLike, cardId, cardCounter) => {
+//   if (!cardLike.classList.contains("card__heart_type_active")) {
     
-    sendLike(cardId)
-      .then((cardData) => {
-        cardLike.classList.toggle("card__heart_type_active");
-        cardCounter.textContent = cardData.likes.length.toString();
-      })
-      .catch((err) => console.log(err));
-  } else {
-    removeLike(cardId)
-      .then((cardData) => {
-        cardLike.classList.toggle("card__heart_type_active");
-        cardCounter.textContent = cardData.likes.length.toString();
-      })
-      .catch((err) => console.log(err));
-  }
-};
+//     sendLike(cardId)
+//       .then((cardData) => {
+//         cardLike.classList.toggle("card__heart_type_active");
+//         cardCounter.textContent = cardData.likes.length.toString();
+//       })
+//       .catch((err) => console.log(err));
+//   } else {
+//     removeLike(cardId)
+//       .then((cardData) => {
+//         cardLike.classList.toggle("card__heart_type_active");
+//         cardCounter.textContent = cardData.likes.length.toString();
+//       })
+//       .catch((err) => console.log(err));
+//   }
+// };
 
 // --------------------------------------------------------------------------------- Функция удаления карточки
-export const handleCardRemoveClick = (cardElement, cardId) => {
-  deleteCard(cardId)
-    .then(() => {
-      cardElement.remove();
-    })
-    .catch((err) => console.log(err));
-};
+// export const handleCardRemoveClick = (cardElement, cardId) => {
+//   deleteCard(cardId)
+//     .then(() => {
+//       cardElement.remove();
+//     })
+//     .catch((err) => console.log(err));
+// };
 
 // --------------------------------------------------------------------------------- Класс Card
-export class Card {
+export default class Card {
   constructor({name, link, likes, owner, _id}, selector) {
     this._name = name;
     this._link = link;
     this._likes = likes;
     this._ownerId = owner._id;
     this._cardid = _id;
-    this._userId = userId;
     this._selector = selector;
   }
 
@@ -163,11 +162,11 @@ export class Card {
     this._element = this._getElement();
     this._setEventListener();
 
-    this._element.querySelector('.card__heading');
-    this._element.querySelector('.card__image');
-    this._element.querySelector('.card__heart');
-    this._element.querySelector('.card__likes-counter');
-    this._element.querySelector('.card__delete');
+    this._caption = this._element.querySelector('.card__heading');
+    this._image = this._element.querySelector('.card__image');
+    this._like = this._element.querySelector('.card__heart');
+    this._likeCounter = this._element.querySelector('.card__likes-counter');
+    this._cardDelete = this._element.querySelector('.card__delete');
 
     return this._element;
   }
