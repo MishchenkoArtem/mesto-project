@@ -21,3 +21,11 @@ export const cardImage = document.forms.formCard.cardImage;
 export const formAvatarElement = document.forms.formAvatar;
 export const avatarInput = document.forms.formAvatar.avatar;
 export let userId = null;
+
+export const fetchParams = {
+  baseUrl: "https://nomoreparties.co/v1/plus-cohort-9",
+  headers: {
+    Authorization: "0ce4a23a-1bec-4586-80d1-c87f648e62fc",
+    "Content-Type": "application/json",
+  },
+};
