@@ -48,7 +48,7 @@ formCardElement.addEventListener("submit", function (e) {
 });
 
 // ---------------------------------------------------------------------------- Функция создания карточки
-export const createCard = ({ name, link, likes, owner: ownerId, _id: idCard }, userId) => {
+/* export const createCard = ({ name, link, likes, owner: ownerId, _id: idCard }, userId) => {
   
   const cardElement = cardTemplate
     .querySelector(".card__background")
@@ -98,13 +98,13 @@ export const createCard = ({ name, link, likes, owner: ownerId, _id: idCard }, u
   });
 
   return cardElement;
-};
+}; */
 
 // ---------------------------------------------------------------------------------Функция отображения карточки
-function renderCard(cardData, cardList, userId) {
+/* function renderCard(cardData, cardList, userId) {
   const cardElement = createCard(cardData, userId);
   cardList.prepend(cardElement);
-}
+} */
 
 // ------------------------------------------------------------------------------ Функция добавления и счета лайков
 export const handleCardLikeClick = (cardLike, cardId, cardCounter) => {
@@ -135,8 +135,9 @@ export const handleCardRemoveClick = (cardElement, cardId) => {
     .catch((err) => console.log(err));
 };
 
-/* export class Card {
-  constructor({name, link, likes, owner, _id: cardId}, userId, selector) {
+// --------------------------------------------------------------------------------- Класс Card
+export class Card {
+  constructor({name, link, likes, owner, _id}, selector) {
     this._name = name;
     this._link = link;
     this._likes = likes;
@@ -162,8 +163,8 @@ export const handleCardRemoveClick = (cardElement, cardId) => {
     this._element = this._getElement();
     this._setEventListener();
 
-    this._element.querySelector('.card__heading').textContent = this._name;
-    this._element.querySelector('.card__image').src = this._link;
+    this._element.querySelector('.card__heading');
+    this._element.querySelector('.card__image');
     this._element.querySelector('.card__heart');
     this._element.querySelector('.card__likes-counter');
     this._element.querySelector('.card__delete');
@@ -172,22 +173,14 @@ export const handleCardRemoveClick = (cardElement, cardId) => {
   }
 
   // Метод слушатель событий
-  _setEventListener() {
-    this._element.querySelector('.card__heart').addEventListener('click', () => {
-      this._handleLikeClick();
-    });
-  }
+  // _setEventListener() {
+  //   this._element.querySelector('.card__heart').addEventListener('click', () => {
+  //     this._handleLikeClick();
+  //   });
+  // }
 
-  // Метод добавления и удаления лайков
-  _handleLikeClick() {
-    this._element.querySelector('.card__heart').classList.toggle('.card__heart_type_active');
-  }
+  // // Метод добавления и удаления лайков
+  // _handleLikeClick() {
+  //   this._element.querySelector('.card__heart').classList.toggle('.card__heart_type_active');
+  // }
 }
-
-// Перебор и создание карточек
-getAppInfo.forEach((item) => {
-  const card = new Card(item, '.template__card');
-  const cardElement = card.generate();
-
-  document.body.prepend(cardElement);
-}) */
