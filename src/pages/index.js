@@ -1,8 +1,8 @@
 import "../pages/index.css";
 import Api from "../components/Api.js";
-import Section from '../components/Section.js';
-import Card from "../components/Card.js";
-import { fetchParams, cardList } from "../components/constants.js";
+import { Section } from '../components/Section.js';
+import { Card } from "../components/Card.js";
+import { fetchParams, cardListSection } from "../components/constants.js";
 
 const api = new Api(fetchParams);
 
@@ -10,19 +10,12 @@ api
   .getAppInfo()
   .then(res => {
     const [userData, cardData] = res;
-    const cards = new Section({
-      data: cardData,
-      renderer: item => {
-        const card = new Card(item, '.template__card');
-        const cardElement = card.generate();
-        cards.setItems(cardElement);
-      }
-    }, cardList )
+    const cardList = new Section({
+      data: cardData
+    }, cardListSection);
+    cardList.renderItem();
   })
   .catch(err => console.log(err));
-
-
-
 
 
 
