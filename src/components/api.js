@@ -54,20 +54,20 @@ export default class Api {
   // }
 
   // Добаление лайка карточки
-  // sendLike(like) {
-  //   return fetch(`${this.baseUrl}/cards/likes/${like}`, {
-  //     method: "PUT",
-  //     headers: this.headers,
-  //   }).then((res) => this.getResponseData(res));
-  // }
+  sendLike(like) {
+    return fetch(`${this.baseUrl}/cards/likes/${like}`, {
+      method: "PUT",
+      headers: this.headers,
+    }).then((res) => this.getResponseData(res));
+  }
 
   // Удаление лайка карточки
-  // removeLike(like) {
-  //   return fetch(`${this.baseUrl}/cards/likes/${like}`, {
-  //     method: "DELETE",
-  //     headers: this.headers,
-  //   }).then((res) => this.getResponseData(res));
-  // }
+  removeLike(like) {
+    return fetch(`${this.baseUrl}/cards/likes/${like}`, {
+      method: "DELETE",
+      headers: this.headers,
+    }).then((res) => this.getResponseData(res));
+  }
 
   // Удаление карточки
   // deleteCard(cardId) {
