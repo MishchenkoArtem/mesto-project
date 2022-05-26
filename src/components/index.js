@@ -93,3 +93,10 @@ formProfileElement.addEventListener("submit", editForm);
 formAvatarElement.addEventListener("submit", changeAvatar);
 
 enableValidation(validationConfig);
+
+/*Блок работы с popups*/
+import PopupWithImage from "./PopupWithImage";
+
+const cardImagePopup = new PopupWithImage('.popup__open-img');
+cardImagePopup.setEventListeners();
+cardImagePopup.open();
