@@ -31,9 +31,7 @@ popupProfile.querySelector(".popup__close").addEventListener("click", () => {
   closePopup(popupProfile);
 });
 
-document.querySelector(".profile__add-button").addEventListener("click", () => {
-  openPopup(popupCard);
-});
+
 
 popupCard.querySelector(".popup__close").addEventListener("click", () => {
   closePopup(popupCard);
@@ -95,7 +93,40 @@ formAvatarElement.addEventListener("submit", changeAvatar);
 enableValidation(validationConfig);
 
 /*-----------------------------------------------------Блок работы с popups*/
+/*Импорты*/
 import PopupWithImage from "../components/PopupWithImage";
+import PopupWithForm from "../components/PopupWithForm";
 
-export const cardImagePopup = new PopupWithImage('.popup__open-img');
-cardImagePopup.setEventListeners();
+/*Попап открытия картинки*/
+export const openCardImagePopup = new PopupWithImage('.popup__open-img');
+openCardImagePopup.setEventListeners();
+
+/*Попап с формой создания карточки*/
+export const createCardPopup = new PopupWithForm('.popup__card', (formInputsValues) => {
+    /*КОД АПИ ДОБАВИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!*/
+});
+createCardPopup.setEventListeners();
+
+document.querySelector(".profile__add-button").addEventListener("click", () => {
+    createCardPopup.open();
+});
+
+/*Попап редактирования аватара*/
+export const modifyAvatarPopup = new PopupWithImage('.popup__avatar', (formInputsValues) => {
+    /*КОД АПИ ДОБАВИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!*/
+});
+modifyAvatarPopup.setEventListeners();
+
+document.querySelector(".profile__edit-avatar").addEventListener("click", () => {
+    modifyProfilePopup.open();
+});
+
+/*Попап с формой редактирования профиля*/
+export const modifyProfilePopup = new PopupWithForm('.popup__profile', (formInputsValues) => {
+    /*КОД АПИ ДОБАВИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!*/
+});
+modifyProfilePopup.setEventListeners();
+
+document.querySelector(".profile__edit-button").addEventListener("click", () => {
+    modifyProfilePopup.open();
+});

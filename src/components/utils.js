@@ -24,4 +24,3 @@ popupList.forEach((popup) => {
     }
   });
 });
- */
