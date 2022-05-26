@@ -1,6 +1,6 @@
-import { Card } from "./Card";
+import Card from "./Card";
 
-export class Section {
+export default class Section {
   constructor({ data }, selector) {
     this._renderedItems = data;
     this._container = document.querySelector(selector);
