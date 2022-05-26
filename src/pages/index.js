@@ -1,15 +1,19 @@
 import "../pages/index.css";
 import Api from "../components/Api.js";
-import { Section } from '../components/Section.js';
-import { Card } from "../components/Card.js";
-import { fetchParams, cardListSection } from "../components/constants.js";
+import Section from '../components/Section.js';
+import { fetchParams, cardListSection, profileName, profileInfo, profileAvatar } from "../components/constants.js";
 
 const api = new Api(fetchParams);
 
 api
   .getAppInfo()
   .then(res => {
-    const [userData, cardData] = res;
+    const [{name, about, avatar}, cardData] = res;
+
+    profileName.textContent = name;
+    profileInfo.textContent = about;
+    profileAvatar.src = avatar;
+
     const cardList = new Section({
       data: cardData
     }, cardListSection);
@@ -78,27 +82,6 @@ getAppInfo()
     initialCards.forEach((cardData) => {
       cardList.prepend(createCard(cardData, userData));
     });
-  })
-  .catch((err) => console.log(err));
-
-api()
-  .then(([user, cards]) => {
-    profileName.textContent = user.name;
-    profileInfo.textContent = user.about;
-    profileAvatar.src = user.avatar;
-    
-    const initialCards = new Section(
-      {
-        data: cards,
-        renderer: (cardData) => {
-          const card = new Card(cardData, ".template__card");
-          const cardElement = card.generate();
-
-          initialCards.setItem(cardElement);
-        },
-      },
-      cardList,
-    );
   })
   .catch((err) => console.log(err));
 
