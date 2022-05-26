@@ -100,3 +100,4 @@ import PopupWithImage from "./PopupWithImage";
 const cardImagePopup = new PopupWithImage('.popup__open-img');
 cardImagePopup.setEventListeners();
 cardImagePopup.open();
+*/

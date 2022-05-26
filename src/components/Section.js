@@ -1,22 +1,20 @@
-import { Card } from './card.js'
+import Card from "./Card";
 
 export default class Section {
-    constructor({ items, renderer }, selector) {
-        this._initialArray = items;
-        this._renderer = renderer;
-      
-        this._container = document.querySelector(selector);
+  constructor({ data }, selector) {
+    this._renderedItems = data;
+    this._container = document.querySelector(selector);
   }
 
-  // Перебирает массив данных
-  renderItems() {
-    this._initialArray.forEach((item) => {
-        this._renderer(item);
+  renderItem() {
+    this._renderedItems.forEach(item => {
+      const cards = new Card(item, '.template__card');
+      const cardElement = cards.generate();
+      this.setItem(cardElement);
     });
-  }
-
-  // Вставка контейнера в разметку
-  setItems(element) {
-      this._container.prepend(element);
+  };
+  
+  setItem(element) {
+    this._container.append(element);
   }
 }

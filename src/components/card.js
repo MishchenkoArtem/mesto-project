@@ -1,10 +1,5 @@
-import {
-  deleteCard,
-  getAppInfo,
-  newPostCard,
-  removeLike,
-  sendLike,
-} from "./api.js";
+import Api from "./Api.js";
+const api = new Api(fetchParams);
 
 import {
   btnAddCard,
@@ -12,6 +7,7 @@ import {
   cardList,
   cardName,
   cardTemplate,
+  fetchParams,
   formCardElement,
   popupCard,
   popupImage,
@@ -25,30 +21,102 @@ import {
   openPopup
 } from "./utils.js";
 
-// ---------------------------------------------------------------------------- Форма создания карточки
-formCardElement.addEventListener("submit", function (e) {
-  e.preventDefault();
+// --------------------------------------------------------------------------------- Класс Card
+export default class Card {
+  constructor({name, link, likes, owner, _id}, selector) {
+    this._name = name;
+    this._link = link;
+    this._likes = likes;
+    this._ownerId = owner._id;
+    this._cardId = _id;
+    this._selector = selector;
+  }
 
-  btnAddCard.textContent = "Сохранение...";
-  
-  newPostCard(cardName.value, cardImage.value)
-    .then((cardData) => {
-      renderCard(cardData, cardList, userId);
-      formCard.reset();
-      btnAddCard.classList.add("popup__button_inactive");
-      btnAddCard.setAttribute("disabled", true);
-      closePopup(popupCard);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
-      btnAddCard.textContent = "Создать";
+  _getElement() {
+    const cardElement = document
+    .querySelector(this._selector)
+    .content
+    .querySelector('.card__background')
+    .cloneNode(true);
+
+    return cardElement;
+  }
+
+  generate() {
+    this._element = this._getElement();
+    this._setEventListener();
+
+    this._element.querySelector('.card__heading').textContent = this._name;
+    this._element.querySelector('.card__image').src = this._link;
+    this._cardLike = this._element.querySelector('.card__heart');
+    this._cardCounter = this._element.querySelector('.card__likes-counter');
+    this._element.querySelector('.card__delete');
+
+    return this._element;
+  }
+
+  //  Метод слушатель событий
+  _setEventListener() {
+    this._element.querySelector('.card__heart').addEventListener('click', () => {
+      this._handleLikeClick();
     });
-});
+  }
+
+  //  Метод добавления и удаления лайков
+  _handleLikeClick() {
+    if (!this._cardLike.classList.contains("card__heart_type_active")) {
+      api
+      .sendLike(this._cardid)
+        .then((cardData) => {
+          this._cardLike.classList.add("card__heart_type_active");
+          this._cardCounter.textContent = cardData.likes.length.toString();
+        })
+        .catch((err) => console.log(err));
+    } else {
+      api
+      .removeLike(this._cardid)
+        .then((cardData) => {
+          this._cardLike.classList.remove("card__heart_type_active");
+          this._cardCounter.textContent = cardData.likes.length.toString();
+        })
+        .catch((err) => console.log(err));
+    }
+
+    this._cardCounter.textContent = this._likes.length.toString();
+    const isLiked = Boolean(this._likes.find((user) => user._id === userId));
+    console.log(isLiked);
+    if (isLiked) {
+      this._cardLike.classList.add("card__heart_type_active");
+    } else {
+      this._cardLike.classList.remove("card__heart_type_active");
+    }
+  };
+}
+
+// ---------------------------------------------------------------------------- Форма создания карточки
+// formCardElement.addEventListener("submit", function (e) {
+//   e.preventDefault();
+
+//   btnAddCard.textContent = "Сохранение...";
+  
+//   newPostCard(cardName.value, cardImage.value)
+//     .then((cardData) => {
+//       renderCard(cardData, cardList, userId);
+//       formCard.reset();
+//       btnAddCard.classList.add("popup__button_inactive");
+//       btnAddCard.setAttribute("disabled", true);
+//       closePopup(popupCard);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     })
+//     .finally(() => {
+//       btnAddCard.textContent = "Создать";
+//     });
+// });
 
 // ---------------------------------------------------------------------------- Функция создания карточки
-export const createCard = ({ name, link, likes, owner: ownerId, _id: idCard }, userId) => {
+/* export const createCard = ({ name, link, likes, owner: ownerId, _id: idCard }, userId) => {
   
   const cardElement = cardTemplate
     .querySelector(".card__background")
@@ -98,96 +166,39 @@ export const createCard = ({ name, link, likes, owner: ownerId, _id: idCard }, u
   });
 
   return cardElement;
-};
+}; */
 
 // ---------------------------------------------------------------------------------Функция отображения карточки
-function renderCard(cardData, cardList, userId) {
+/* function renderCard(cardData, cardList, userId) {
   const cardElement = createCard(cardData, userId);
   cardList.prepend(cardElement);
-}
+} */
 
 // ------------------------------------------------------------------------------ Функция добавления и счета лайков
-export const handleCardLikeClick = (cardLike, cardId, cardCounter) => {
-  if (!cardLike.classList.contains("card__heart_type_active")) {
+// export const handleCardLikeClick = (cardLike, cardId, cardCounter) => {
+//   if (!cardLike.classList.contains("card__heart_type_active")) {
     
-    sendLike(cardId)
-      .then((cardData) => {
-        cardLike.classList.toggle("card__heart_type_active");
-        cardCounter.textContent = cardData.likes.length.toString();
-      })
-      .catch((err) => console.log(err));
-  } else {
-    removeLike(cardId)
-      .then((cardData) => {
-        cardLike.classList.toggle("card__heart_type_active");
-        cardCounter.textContent = cardData.likes.length.toString();
-      })
-      .catch((err) => console.log(err));
-  }
-};
+//     sendLike(cardId)
+//       .then((cardData) => {
+//         cardLike.classList.toggle("card__heart_type_active");
+//         cardCounter.textContent = cardData.likes.length.toString();
+//       })
+//       .catch((err) => console.log(err));
+//   } else {
+//     removeLike(cardId)
+//       .then((cardData) => {
+//         cardLike.classList.toggle("card__heart_type_active");
+//         cardCounter.textContent = cardData.likes.length.toString();
+//       })
+//       .catch((err) => console.log(err));
+//   }
+// };
 
 // --------------------------------------------------------------------------------- Функция удаления карточки
-export const handleCardRemoveClick = (cardElement, cardId) => {
-  deleteCard(cardId)
-    .then(() => {
-      cardElement.remove();
-    })
-    .catch((err) => console.log(err));
-};
-
-/* export class Card {
-  constructor({name, link, likes, owner, _id: cardId}, userId, selector) {
-    this._name = name;
-    this._link = link;
-    this._likes = likes;
-    this._ownerId = owner._id;
-    this._cardid = _id;
-    this._userId = userId;
-    this._selector = selector;
-  }
-
-  // Метод обработки селектора
-  _getElement() {
-    const cardElement = document
-    .querySelector(this._selector)
-    .content
-    .querySelector('card__background')
-    .cloneNode(true);
-
-    return cardElement;
-  }
-
-  // Метод создания карточки
-  generate() {
-    this._element = this._getElement();
-    this._setEventListener();
-
-    this._element.querySelector('.card__heading').textContent = this._name;
-    this._element.querySelector('.card__image').src = this._link;
-    this._element.querySelector('.card__heart');
-    this._element.querySelector('.card__likes-counter');
-    this._element.querySelector('.card__delete');
-
-    return this._element;
-  }
-
-  // Метод слушатель событий
-  _setEventListener() {
-    this._element.querySelector('.card__heart').addEventListener('click', () => {
-      this._handleLikeClick();
-    });
-  }
-
-  // Метод добавления и удаления лайков
-  _handleLikeClick() {
-    this._element.querySelector('.card__heart').classList.toggle('.card__heart_type_active');
-  }
-}
-
-// Перебор и создание карточек
-getAppInfo.forEach((item) => {
-  const card = new Card(item, '.template__card');
-  const cardElement = card.generate();
-
-  document.body.prepend(cardElement);
-}) */
+// export const handleCardRemoveClick = (cardElement, cardId) => {
+//   deleteCard(cardId)
+//     .then(() => {
+//       cardElement.remove();
+//     })
+//     .catch((err) => console.log(err));
+// };

@@ -1,4 +1,4 @@
-import { avatarUpdate, profileUpdate } from "./api.js";
+import Api from "./Api.js";
 import {
   avatarInput,
   btnEditProfile,
