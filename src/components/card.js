@@ -136,7 +136,7 @@ import {
 // };
 
 // --------------------------------------------------------------------------------- Класс Card
-export default class Card {
+export class Card {
   constructor({name, link, likes, owner, _id}, selector) {
     this._name = name;
     this._link = link;
@@ -146,18 +146,16 @@ export default class Card {
     this._selector = selector;
   }
 
-  // Метод обработки селектора
   _getElement() {
     const cardElement = document
     .querySelector(this._selector)
     .content
-    .querySelector('card__background')
+    .querySelector('.card__background')
     .cloneNode(true);
 
     return cardElement;
   }
 
-  // Метод создания карточки
   generate() {
     this._element = this._getElement();
     this._setEventListener();
@@ -168,18 +166,21 @@ export default class Card {
     this._likeCounter = this._element.querySelector('.card__likes-counter');
     this._cardDelete = this._element.querySelector('.card__delete');
 
+    this._caption.textContent = this._name;
+    this._image.src = this._link;
+
     return this._element;
   }
 
-  // Метод слушатель событий
-  // _setEventListener() {
-  //   this._element.querySelector('.card__heart').addEventListener('click', () => {
-  //     this._handleLikeClick();
-  //   });
-  // }
+  //  Метод слушатель событий
+  _setEventListener() {
+    this._element.querySelector('.card__heart').addEventListener('click', () => {
+      this._handleLikeClick();
+    });
+  }
 
-  // // Метод добавления и удаления лайков
-  // _handleLikeClick() {
-  //   this._element.querySelector('.card__heart').classList.toggle('.card__heart_type_active');
-  // }
+  //  Метод добавления и удаления лайков
+  _handleLikeClick() {
+    this._element.querySelector('.card__heart').classList.toggle('.card__heart_type_active');
+  }
 }
