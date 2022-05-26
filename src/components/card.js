@@ -1,10 +1,5 @@
-import {
-  deleteCard,
-  getAppInfo,
-  newPostCard,
-  removeLike,
-  sendLike,
-} from "./Api.js";
+import Api from "./Api.js";
+const api = new Api(fetchParams);
 
 import {
   btnAddCard,
@@ -12,6 +7,7 @@ import {
   cardList,
   cardName,
   cardTemplate,
+  fetchParams,
   formCardElement,
   popupCard,
   popupImage,
@@ -24,6 +20,78 @@ import {
   closePopup,
   openPopup
 } from "./utils.js";
+
+// --------------------------------------------------------------------------------- Класс Card
+export default class Card {
+  constructor({name, link, likes, owner, _id}, selector) {
+    this._name = name;
+    this._link = link;
+    this._likes = likes;
+    this._ownerId = owner._id;
+    this._cardId = _id;
+    this._selector = selector;
+  }
+
+  _getElement() {
+    const cardElement = document
+    .querySelector(this._selector)
+    .content
+    .querySelector('.card__background')
+    .cloneNode(true);
+
+    return cardElement;
+  }
+
+  generate() {
+    this._element = this._getElement();
+    this._setEventListener();
+
+    this._element.querySelector('.card__heading').textContent = this._name;
+    this._element.querySelector('.card__image').src = this._link;
+    this._cardLike = this._element.querySelector('.card__heart');
+    this._cardCounter = this._element.querySelector('.card__likes-counter');
+    this._element.querySelector('.card__delete');
+
+    return this._element;
+  }
+
+  //  Метод слушатель событий
+  _setEventListener() {
+    this._element.querySelector('.card__heart').addEventListener('click', () => {
+      this._handleLikeClick();
+    });
+  }
+
+  //  Метод добавления и удаления лайков
+  _handleLikeClick() {
+    if (!this._cardLike.classList.contains("card__heart_type_active")) {
+      api
+      .sendLike(this._cardid)
+        .then((cardData) => {
+          this._cardLike.classList.add("card__heart_type_active");
+          this._cardCounter.textContent = cardData.likes.length.toString();
+        })
+        .catch((err) => console.log(err));
+    } else {
+      api
+      .removeLike(this._cardid)
+        .then((cardData) => {
+          this._cardLike.classList.remove("card__heart_type_active");
+          this._cardCounter.textContent = cardData.likes.length.toString();
+        })
+        .catch((err) => console.log(err));
+    }
+
+    this._cardCounter.textContent = this._likes.length.toString();
+    const isLiked = Boolean(this._likes.find((user) => user._id === userId));
+    console.log(isLiked);
+    if (isLiked) {
+      this._cardLike.classList.add("card__heart_type_active");
+    } else {
+      this._cardLike.classList.remove("card__heart_type_active");
+    }
+  };
+}
 
 // ---------------------------------------------------------------------------- Форма создания карточки
 // formCardElement.addEventListener("submit", function (e) {
@@ -134,53 +202,3 @@ import {
 //     })
 //     .catch((err) => console.log(err));
 // };
-
-// --------------------------------------------------------------------------------- Класс Card
-export class Card {
-  constructor({name, link, likes, owner, _id}, selector) {
-    this._name = name;
-    this._link = link;
-    this._likes = likes;
-    this._ownerId = owner._id;
-    this._cardid = _id;
-    this._selector = selector;
-  }
-
-  _getElement() {
-    const cardElement = document
-    .querySelector(this._selector)
-    .content
-    .querySelector('.card__background')
-    .cloneNode(true);
-
-    return cardElement;
-  }
-
-  generate() {
-    this._element = this._getElement();
-    this._setEventListener();
-
-    this._caption = this._element.querySelector('.card__heading');
-    this._image = this._element.querySelector('.card__image');
-    this._like = this._element.querySelector('.card__heart');
-    this._likeCounter = this._element.querySelector('.card__likes-counter');
-    this._cardDelete = this._element.querySelector('.card__delete');
-
-    this._caption.textContent = this._name;
-    this._image.src = this._link;
-
-    return this._element;
-  }
-
-  //  Метод слушатель событий
-  _setEventListener() {
-    this._element.querySelector('.card__heart').addEventListener('click', () => {
-      this._handleLikeClick();
-    });
-  }
-
-  //  Метод добавления и удаления лайков
-  _handleLikeClick() {
-    this._element.querySelector('.card__heart').classList.toggle('.card__heart_type_active');
-  }
-}
