@@ -1,20 +1,20 @@
-export default class Section {
-    constructor({ items, renderer }, selector) {
-        this._initialArray = items;
-        this._renderer = renderer;
-        
-        this._container = document.querySelector(selector);
-    }
+import { Card } from "./Card";
 
-  // Перебирает массив данных
-  renderItems() {
-    this._initialArray.forEach((item) => {
-        this._renderer(item);
-    });
+export class Section {
+  constructor({ data }, selector) {
+    this._renderedItems = data;
+    this._container = document.querySelector(selector);
   }
 
-  // Вставка контейнера в разметку
-  setItems(element) {
-      this._container.prepend(element);
+  renderItem() {
+    this._renderedItems.forEach(item => {
+      const cards = new Card(item, '.template__card');
+      const cardElement = cards.generate();
+      this.setItem(cardElement);
+    });
+  };
+  
+  setItem(element) {
+    this._container.append(element);
   }
 }
