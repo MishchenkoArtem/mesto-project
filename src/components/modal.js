@@ -1,4 +1,3 @@
-import Api from "./Api.js";
 import {
   avatarInput,
   btnEditProfile,
