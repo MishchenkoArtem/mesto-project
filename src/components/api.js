@@ -54,8 +54,8 @@ export default class Api {
   // }
 
   // Добаление лайка карточки
-  sendLike(like) {
-    return fetch(`${this.baseUrl}/cards/likes/${like}`, {
+  sendLike(likes) {
+    return fetch(`${this.baseUrl}/cards/likes/${likes}`, {
       method: "PUT",
       headers: this.headers,
     }).then((res) => this.getResponseData(res));
