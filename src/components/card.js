@@ -67,24 +67,23 @@ export default class Card {
     if (!this._cardLike.classList.contains("card__heart_type_active")) {
       api
       .sendLike(this._cardid)
-        .then((cardData) => {
+        .then(() => {
           this._cardLike.classList.add("card__heart_type_active");
-          this._cardCounter.textContent = cardData.likes.length.toString();
+          this._cardCounter.textContent = this._likes.length.toString();
         })
         .catch((err) => console.log(err));
     } else {
       api
       .removeLike(this._cardid)
-        .then((cardData) => {
+        .then(() => {
           this._cardLike.classList.remove("card__heart_type_active");
-          this._cardCounter.textContent = cardData.likes.length.toString();
+          this._cardCounter.textContent = this._likes.length.toString();
         })
         .catch((err) => console.log(err));
     }
 
     this._cardCounter.textContent = this._likes.length.toString();
     const isLiked = Boolean(this._likes.find((user) => user._id === userId));
-    console.log(isLiked);
     if (isLiked) {
       this._cardLike.classList.add("card__heart_type_active");
     } else {
