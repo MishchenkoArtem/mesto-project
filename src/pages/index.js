@@ -62,7 +62,7 @@ enableValidation(validationConfig); */
 // -----------------------------------------------------Блок работы с popups
 // Импорты
 
-/* import PopupWithImage from "../components/PopupWithImage";
+import PopupWithImage from "../components/PopupWithImage";
 import PopupWithForm from "../components/PopupWithForm";
 
 //  Попап открытия картинки
@@ -70,7 +70,7 @@ export const openCardImagePopup = new PopupWithImage('.popup__open-img');
 openCardImagePopup.setEventListeners();
 
 //  Попап с формой создания карточки
-export const createCardPopup = new PopupWithForm('.popup__card', (formInputsValues) => {
+/* export const createCardPopup = new PopupWithForm('.popup__card', (formInputsValues) => {
 // КОД АПИ ДОБАВИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!
 });
 createCardPopup.setEventListeners();
