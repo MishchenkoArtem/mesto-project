@@ -69,32 +69,33 @@ import PopupWithForm from "../components/PopupWithForm";
 export const openCardImagePopup = new PopupWithImage('.popup__open-img');
 openCardImagePopup.setEventListeners();
 
-//  Попап с формой создания карточки
-/* export const createCardPopup = new PopupWithForm('.popup__card', (formInputsValues) => {
-// КОД АПИ ДОБАВИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!
-});
-createCardPopup.setEventListeners();
+// Попап с формой создания карточки
+// export const createCardPopup = new PopupWithForm('.popup__card', (formInputsValues) => {
+// // КОД АПИ ДОБАВИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!
+// });
+// createCardPopup.setEventListeners();
 
-document.querySelector(".profile__add-button").addEventListener("click", () => {
-    createCardPopup.open();
-});
+// document.querySelector(".profile__add-button").addEventListener("click", () => {
+//     createCardPopup.open();
+// });
 
 // Попап редактирования аватара
-export const modifyAvatarPopup = new PopupWithImage('.popup__avatar', (formInputsValues) => {
+export const modifyAvatarPopup = new PopupWithForm('.popup__avatar', (formInputsValues) => {
 // КОД АПИ ДОБАВИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!
+  console.log('hello world');
 });
 modifyAvatarPopup.setEventListeners();
 
 document.querySelector(".profile__edit-avatar").addEventListener("click", () => {
-    modifyProfilePopup.open();
+    modifyAvatarPopup.open();
 });
 
 // Попап с формой редактирования профиля
-export const modifyProfilePopup = new PopupWithForm('.popup__profile', (formInputsValues) => {
+// export const modifyProfilePopup = new PopupWithForm('.popup__profile', (formInputsValues) => {
 // КОД АПИ ДОБАВИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!
-});
-modifyProfilePopup.setEventListeners();
+// });
+// modifyProfilePopup.setEventListeners();
 
-document.querySelector(".profile__edit-button").addEventListener("click", () => {
-    modifyProfilePopup.open();
-}); */
+// document.querySelector(".profile__edit-button").addEventListener("click", () => {
+//     modifyProfilePopup.open();
+// });
