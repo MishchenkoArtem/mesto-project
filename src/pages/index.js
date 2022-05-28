@@ -1,25 +1,31 @@
 import "../pages/index.css";
-import { changeAvatar, editForm } from "./modal.js";
-import { createCard } from "./card.js";
-import { validationConfig, enableValidation } from "./Validate.js";
-import { openPopup, closePopup } from "./utils.js";
-import { getAppInfo } from "./api.js";
-import {
-  formAvatarElement,
-  formProfileElement,
-  jobInput,
-  nameInput,
-  popupAvatar,
-  popupCard,
-  popupImage,
-  popupProfile,
-  profileInfo,
-  profileName,
-  profileAvatar,
-  cardList,
-} from "./constants";
+import Api from "../components/Api";
+import Section from "../components/Section";
+import Card from '../components/Card.js'
+import { cardListSection, fetchParams, profileAvatar, profileInfo, profileName, btnSaveAvatar} from "../components/constants";
 
-document
+const api = new Api(fetchParams);
+
+const addCards = new Section(
+  item => {
+    const cards = new Card(item, '.template__card');
+    const cardElement = cards.generate()
+    addCards.setItem(cardElement);
+  }, cardListSection);
+
+api
+  .getAppInfo()
+  .then(res => {
+    const [{ name, about, avatar }, cardData] = res;
+
+    profileName.textContent = name;
+    profileInfo.textContent = about;
+    profileAvatar.src = avatar;
+    
+    addCards.renderItem(cardData);
+  });
+
+/* document
   .querySelector(".profile__edit-button")
   .addEventListener("click", () => {
     nameInput.value = profileName.textContent;
@@ -31,8 +37,6 @@ popupProfile.querySelector(".popup__close").addEventListener("click", () => {
   closePopup(popupProfile);
 });
 
-
-
 popupCard.querySelector(".popup__close").addEventListener("click", () => {
   closePopup(popupCard);
 });
@@ -40,41 +44,6 @@ popupCard.querySelector(".popup__close").addEventListener("click", () => {
 popupImage.querySelector(".popup__close").addEventListener("click", () => {
   closePopup(popupImage);
 });
-
-getAppInfo()
-  .then(([user, cards]) => {
-    profileName.textContent = user.name;
-    profileInfo.textContent = user.about;
-    profileAvatar.src = user.avatar;
-    const userData = user._id;
-    const initialCards = cards;
-    initialCards.forEach((cardData) => {
-      cardList.prepend(createCard(cardData, userData));
-    });
-  })
-  .catch((err) => console.log(err));
-
-/* getAppInfo()
-  .then(([user, cards]) => {
-    profileName.textContent = user.name;
-    profileInfo.textContent = user.about;
-    profileAvatar.src = user.avatar;
-    const userData = user._id;
-    const arrayCards = cards;
-    const initialCards = new Section(
-      {
-        data: arrayCards,
-        renderer: (cardItem) => {
-          const card = new Card(cardItem, ".template__card");
-          const cardElement = card.generate();
-
-          cardsList.setItem(cardElement);
-        },
-      },
-      arrayCards
-    );
-  })
-  .catch((err) => console.log(err)); */
 
 document
   .querySelector(".profile__edit-avatar")
@@ -90,20 +59,32 @@ formProfileElement.addEventListener("submit", editForm);
 
 formAvatarElement.addEventListener("submit", changeAvatar);
 
-enableValidation(validationConfig);
+enableValidation(validationConfig); */
 
-/*-----------------------------------------------------Блок работы с popups*/
-/*Импорты*/
+// -----------------------------------------------------Блок работы с popups
+// Импорты
+
 import PopupWithImage from "../components/PopupWithImage";
 import PopupWithForm from "../components/PopupWithForm";
+import FormValidator from "../components/FormValidator";
 
-/*Попап открытия картинки*/
+import {popupCard, popupProfile, popupAvatar, formsElementsSelectors} from "../components/constants";
+
+//  Попап открытия картинки
 export const openCardImagePopup = new PopupWithImage('.popup__open-img');
 openCardImagePopup.setEventListeners();
 
-/*Попап с формой создания карточки*/
-export const createCardPopup = new PopupWithForm('.popup__card', () => {
-    /*КОД АПИ ДОБАВИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!*/
+//  Попап с формой создания карточки
+export const createCardPopup = new PopupWithForm('.popup__card', (inputsValues) => {
+  api
+    .newPostCard(inputsValues)
+    .then(res => {
+      addCards.renderItem(res);
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      btnSaveAvatar.textContent = "Сохранить";
+    });
 });
 createCardPopup.setEventListeners();
 
@@ -111,22 +92,48 @@ document.querySelector(".profile__add-button").addEventListener("click", () => {
     createCardPopup.open();
 });
 
-/*Попап редактирования аватара*/
-export const modifyAvatarPopup = new PopupWithImage('.popup__avatar', () => {
-    /*КОД АПИ ДОБАВИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!*/
+const createCardPopupValidation = new FormValidator(formsElementsSelectors, popupCard);
+createCardPopupValidation.enableValidation();
+
+// Попап редактирования аватара
+export const modifyAvatarPopup = new PopupWithForm('.popup__avatar', (inputsValues) => {
+  api
+    .avatarUpdate(inputsValues)
+    .then(res => {
+      profileAvatar.src = res.avatar;
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      btnSaveAvatar.textContent = "Сохранить";
+    });
 });
 modifyAvatarPopup.setEventListeners();
 
 document.querySelector(".profile__edit-avatar").addEventListener("click", () => {
-    modifyProfilePopup.open();
+    modifyAvatarPopup.open();
 });
 
-/*Попап с формой редактирования профиля*/
-export const modifyProfilePopup = new PopupWithForm('.popup__profile', () => {
-    /*КОД АПИ ДОБАВИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!*/
+const modifyAvatarPopupValidation = new FormValidator(formsElementsSelectors, popupAvatar);
+modifyAvatarPopupValidation.enableValidation();
+
+//  Попап с формой редактирования профиля
+export const modifyProfilePopup = new PopupWithForm('.popup__profile', (inputsValues) => {
+  api
+    .profileUpdate(inputsValues)
+    .then(res => {
+      profileName.textContent = res.name;
+      profileInfo.textContent = res.about;
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      btnSaveAvatar.textContent = "Сохранить";
+    });
 });
 modifyProfilePopup.setEventListeners();
 
 document.querySelector(".profile__edit-button").addEventListener("click", () => {
     modifyProfilePopup.open();
 });
+
+const modifyProfilePopupValidation = new FormValidator(formsElementsSelectors, popupProfile);
+modifyProfilePopupValidation.enableValidation();

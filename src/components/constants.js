@@ -22,6 +22,13 @@ export const formAvatarElement = document.forms.formAvatar;
 export const avatarInput = document.forms.formAvatar.avatar;
 export let userId = null;
 
+export const formsElementsSelectors = {
+  popupInputSelector: '.popup__input',
+  popupInputErrorSelector: '.popup__input-error',
+  popupButtonSelector: '.popup__button'
+}
+
+
 export const fetchParams = {
   baseUrl: "https://nomoreparties.co/v1/plus-cohort-9",
   headers: {

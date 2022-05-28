@@ -1,34 +1,15 @@
+import { openCardImagePopup } from "../pages/index.js";
 import Api from "./Api.js";
+import { fetchParams, userId } from "./constants.js";
+import PopupWithImage from "./PopupWithImage.js";
 const api = new Api(fetchParams);
 
-import {
-  btnAddCard,
-  cardImage,
-  cardList,
-  cardName,
-  cardTemplate,
-  fetchParams,
-  formCardElement,
-  popupCard,
-  popupImage,
-  popupPicture,
-  popupPictureCaption,
-  userId
-} from "./constants.js";
-
-import {
-  closePopup,
-  openPopup
-} from "./utils.js";
-
-// --------------------------------------------------------------------------------- Класс Card
 export default class Card {
-  constructor({name, link, likes, owner, _id}, selector) {
-    this._name = name;
-    this._link = link;
-    this._likes = likes;
-    this._ownerId = owner._id;
-    this._cardId = _id;
+  constructor(data, selector) {
+    this._name = data.name;
+    this._link = data.link;
+    this._likes = data.likes;
+
     this._selector = selector;
   }
 
@@ -44,53 +25,58 @@ export default class Card {
 
   generate() {
     this._element = this._getElement();
-    this._setEventListener();
 
-    this._element.querySelector('.card__heading').textContent = this._name;
-    this._element.querySelector('.card__image').src = this._link;
+    this._cardHeading = this._element.querySelector('.card__heading');
+    this._cardImage = this._element.querySelector('.card__image');
     this._cardLike = this._element.querySelector('.card__heart');
     this._cardCounter = this._element.querySelector('.card__likes-counter');
     this._element.querySelector('.card__delete');
-
+    this._cardImage.src = this._link;
+    this._cardHeading.textContent = this._name;
+    
+    this._setEventListener();
     return this._element;
   }
 
   //  Метод слушатель событий
   _setEventListener() {
-    this._element.querySelector('.card__heart').addEventListener('click', () => {
+    this._cardLike.addEventListener('click', () => {
       this._handleLikeClick();
+    });
+
+    this._cardImage.addEventListener('click', (evt) => {
+      openCardImagePopup.open(evt);
     });
   }
 
   //  Метод добавления и удаления лайков
-  _handleLikeClick() {
-    if (!this._cardLike.classList.contains("card__heart_type_active")) {
-      api
-      .sendLike(this._cardid)
-        .then((cardData) => {
-          this._cardLike.classList.add("card__heart_type_active");
-          this._cardCounter.textContent = cardData.likes.length.toString();
-        })
-        .catch((err) => console.log(err));
-    } else {
-      api
-      .removeLike(this._cardid)
-        .then((cardData) => {
-          this._cardLike.classList.remove("card__heart_type_active");
-          this._cardCounter.textContent = cardData.likes.length.toString();
-        })
-        .catch((err) => console.log(err));
-    }
+  // _handleLikeClick() {
+  //   if (!this._cardLike.classList.contains("card__heart_type_active")) {
+  //     api
+  //     .sendLike(this._cardid)
+  //       .then(() => {
+  //         this._cardLike.classList.add("card__heart_type_active");
+  //         this._cardCounter.textContent = this._likes.length.toString();
+  //       })
+  //       .catch((err) => console.log(err));
+  //   } else {
+  //     api
+  //     .removeLike(this._cardid)
+  //       .then(() => {
+  //         this._cardLike.classList.remove("card__heart_type_active");
+  //         this._cardCounter.textContent = this._likes.length.toString();
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
 
-    this._cardCounter.textContent = this._likes.length.toString();
-    const isLiked = Boolean(this._likes.find((user) => user._id === userId));
-    console.log(isLiked);
-    if (isLiked) {
-      this._cardLike.classList.add("card__heart_type_active");
-    } else {
-      this._cardLike.classList.remove("card__heart_type_active");
-    }
-  };
+  //   this._cardCounter.textContent = this._likes.length.toString();
+  //   const isLiked = Boolean(this._likes.find((user) => user._id === userId));
+  //   if (isLiked) {
+  //     this._cardLike.classList.add("card__heart_type_active");
+  //   } else {
+  //     this._cardLike.classList.remove("card__heart_type_active");
+  //   }
+  // };
 }
 
 // ---------------------------------------------------------------------------- Форма создания карточки

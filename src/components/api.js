@@ -29,33 +29,33 @@ export default class Api {
   }
 
   // Обновление данных пользователя
-  // profileUpdate(name, info) {
-  //   return fetch(`${this.baseUrl}/users/me`, {
-  //     method: "PATCH",
-  //     headers: this.headers,
-  //     body: JSON.stringify({
-  //       name: name,
-  //       about: info,
-  //     }),
-  //   }).then((res) => this.getResponseData(res));
-  // }
+  profileUpdate(userInfo) {
+    return fetch(`${this.baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this.headers,
+      body: JSON.stringify({
+        name: userInfo.nameProfile,
+        about: userInfo.professionProfile
+      }),
+    }).then((res) => this.getResponseData(res));
+  }
 
   // Добавление новой карточки
-  // newPostCard(cardName, cardImage, ownerId) {
-  //   return fetch(`${this.baseUrl}/cards`, {
-  //     method: "POST",
-  //     headers: this.headers,
-  //     body: JSON.stringify({
-  //       name: cardName,
-  //       link: cardImage,
-  //       owner: ownerId,
-  //     }),
-  //   }).then((res) => this.getResponseData(res));
-  // }
+  newPostCard(cardName, cardImage, ownerId) {
+     return fetch(`${this.baseUrl}/cards`, {
+       method: "POST",
+       headers: this.headers,
+       body: JSON.stringify({
+         name: cardName,
+         link: cardImage,
+         owner: ownerId,
+       }),
+     }).then((res) => this.getResponseData(res));
+  }
 
   // Добаление лайка карточки
-  sendLike(like) {
-    return fetch(`${this.baseUrl}/cards/likes/${like}`, {
+  sendLike(likes) {
+    return fetch(`${this.baseUrl}/cards/likes/${likes}`, {
       method: "PUT",
       headers: this.headers,
     }).then((res) => this.getResponseData(res));
@@ -78,15 +78,13 @@ export default class Api {
   // }
 
   // Добавление новой иконки пользователя
-  // avatarUpdate(avatar) {
-  //   return fetch(`${this.baseUrl}/users/me/avatar`, {
-  //     method: "PATCH",
-  //     headers: this.headers,
-  //     body: JSON.stringify({
-  //       avatar: avatar,
-  //     }),
-  //   }).then((res) => this.getResponseData(res));
-  // }
+  avatarUpdate(avatar) {
+    return fetch(`${this.baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this.headers,
+      body: JSON.stringify(avatar),
+    }).then((res) => this.getResponseData(res));
+  }
 }
 
 // const config = {

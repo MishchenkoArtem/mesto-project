@@ -1,20 +1,18 @@
-import Card from "./Card";
-
 export default class Section {
-  constructor({ data }, selector) {
-    this._renderedItems = data;
+  constructor(renderer, selector) {
+    this._renderer = renderer;
     this._container = document.querySelector(selector);
   }
 
-  renderItem() {
-    this._renderedItems.forEach(item => {
-      const cards = new Card(item, '.template__card');
-      const cardElement = cards.generate();
-      this.setItem(cardElement);
-    });
+  renderItem(cards) {
+    if (cards.length > 1) {
+      cards.forEach(item => this._renderer(item));
+    } else {
+      this._renderer(cards);
+    }
   };
   
   setItem(element) {
-    this._container.append(element);
+    this._container.prepend(element);
   }
 }

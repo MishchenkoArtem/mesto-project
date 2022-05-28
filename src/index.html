@@ -14,11 +14,11 @@
     </header>
     <main>
         <section class="profile">
-            <img src="<%=require('./images/avatar-profile.jpg')%>" alt="Аватар" class="profile__avatar">
+            <img src="" alt="Аватар" class="profile__avatar">
             <button type="button" class="profile__edit-avatar"></button>
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <h1 class="profile__name"></h1>
             <button type="button" class="profile__edit-button"></button>
-            <p class="profile__info">Исследователь океана</p>
+            <p class="profile__info"></p>
             <button type="button" class="profile__add-button"></button>
         </section>
         <section class="card">
@@ -37,14 +37,14 @@
                 <h2 class="popup__heading">Редактировать профиль</h2>
                 <form name="formProfile" tabindex="-1" class="popup__form" novalidate>
                     <fieldset class="popup__input-container">
-                        <label for="name">
+                        <label for="profile_name">
                             <input class="popup__input" id="profile_name" name="nameProfile" type="text" value=""
                                 placeholder="Имя" minlength="2" maxlength="40" required>
                             <span class="popup__input-error" id="error-profile_name"></span>
                         </label>
                     </fieldset>
                     <fieldset class="popup__input-container">
-                        <label for="profession">
+                        <label for="profile_profession">
                             <input class="popup__input" id="profile_profession" name="professionProfile" type="text"
                                 value="" placeholder="О себе" minlength="2" maxlength="200" required>
                             <span class="popup__input-error" id="error-profile_profession"></span>
@@ -62,7 +62,7 @@
                 <h2 class="popup__heading">Новое место</h2>
                 <form name="formCard" class="popup__form" novalidate>
                     <fieldset class="popup__input-container">
-                        <label for="cardName">
+                        <label for="card_name">
                             <input class="popup__input" id="card_name" name="cardName" type="text" value=""
                                 placeholder="Название" minlength="2" maxlength="30" required>
                             <span class="popup__input-error" id="error-card_name"></span>
@@ -97,7 +97,7 @@
                 <form name="formAvatar" class="popup__form" novalidate>
                     <fieldset class="popup__input-container">
                         <label for="avatar">
-                            <input class="popup__input" id="avatar" name="avatar" type="text" value="" placeholder="Ссылка на картинку"
+                            <input class="popup__input" id="avatar" name="avatar" type="url" value="" placeholder="Ссылка на картинку"
                                 minlength="2" maxlength="" required>
                             <span class="popup__input-error" id="error-avatar"></span>
                         </label>
