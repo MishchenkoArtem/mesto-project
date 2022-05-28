@@ -1,5 +1,7 @@
+import { openCardImagePopup } from "../pages/index.js";
 import Api from "./Api.js";
 import { fetchParams, userId } from "./constants.js";
+import PopupWithImage from "./PopupWithImage.js";
 const api = new Api(fetchParams);
 
 export default class Card {
@@ -28,11 +30,13 @@ export default class Card {
   generate() {
     this._element = this._getElement();
 
-    this._element.querySelector('.card__heading').textContent = this._name;
-    this._cardImage = this._element.querySelector('.card__image').src = this._link;
+    this._heading = this._element.querySelector('.card__heading');
+    this._cardImage = this._element.querySelector('.card__image');
     this._cardLike = this._element.querySelector('.card__heart');
     this._cardCounter = this._element.querySelector('.card__likes-counter');
     this._element.querySelector('.card__delete');
+    this._cardImage.src = this._link;
+    this._heading.textContent = this._name;
     
     this._setEventListener();
     return this._element;
@@ -44,8 +48,8 @@ export default class Card {
       this._handleLikeClick();
     });
 
-    this._cardImage.addEventListener('click', () => {
-      this._handleCardClick();
+    this._cardImage.addEventListener('click', (evt) => {
+      openCardImagePopup.open(evt);
     })
   }
 
