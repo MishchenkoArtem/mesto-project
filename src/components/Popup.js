@@ -24,10 +24,9 @@ export default class Popup{
         closePopupButton.addEventListener('click', ()=> this.close());
     }
 
-    _handleEscClose = (evt) =>{
+    _handleEscClose = (evt) => {
         if (evt.key === "Escape") {
             this.close();
         }
     }
 }
-/**/
