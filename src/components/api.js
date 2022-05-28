@@ -29,29 +29,28 @@ export default class Api {
   }
 
   // Обновление данных пользователя
-  // profileUpdate(name, info) {
-  //   return fetch(`${this.baseUrl}/users/me`, {
-  //     method: "PATCH",
-  //     headers: this.headers,
-  //     body: JSON.stringify({
-  //       name: name,
-  //       about: info,
-  //     }),
-  //   }).then((res) => this.getResponseData(res));
-  // }
+  profileUpdate(userInfo) {
+    return fetch(`${this.baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this.headers,
+      body: JSON.stringify({
+        name: userInfo.nameProfile,
+        about: userInfo.professionProfile
+      }),
+    }).then((res) => this.getResponseData(res));
+  }
 
   // Добавление новой карточки
-  // newPostCard(cardName, cardImage, ownerId) {
-  //   return fetch(`${this.baseUrl}/cards`, {
-  //     method: "POST",
-  //     headers: this.headers,
-  //     body: JSON.stringify({
-  //       name: cardName,
-  //       link: cardImage,
-  //       owner: ownerId,
-  //     }),
-  //   }).then((res) => this.getResponseData(res));
-  // }
+  newPostCard(cardInfo) {
+    return fetch(`${this.baseUrl}/cards`, {
+      method: "POST",
+      headers: this.headers,
+      body: JSON.stringify({
+        name: cardInfo.cardName,
+        link: cardInfo.cardImage,
+      }),
+    }).then((res) => this.getResponseData(res));
+  }
 
   // Добаление лайка карточки
   sendLike(likes) {
@@ -78,15 +77,13 @@ export default class Api {
   // }
 
   // Добавление новой иконки пользователя
-  // avatarUpdate(avatar) {
-  //   return fetch(`${this.baseUrl}/users/me/avatar`, {
-  //     method: "PATCH",
-  //     headers: this.headers,
-  //     body: JSON.stringify({
-  //       avatar: avatar,
-  //     }),
-  //   }).then((res) => this.getResponseData(res));
-  // }
+  avatarUpdate(avatar) {
+    return fetch(`${this.baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this.headers,
+      body: JSON.stringify(avatar),
+    }).then((res) => this.getResponseData(res));
+  }
 }
 
 // const config = {
