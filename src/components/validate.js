@@ -129,4 +129,28 @@ export const enableValidation = ({ formSelector, ...rest }) => {
 
     setEventListeners(formElement, rest);
   });
-};
+}
+
+/*----------*//*Созадние класса валидации форм*/
+
+const formsElementsSelectors = {
+  popupInputSelector: '.popup__input',
+  popupInputErrorSelector: '.popup__input-error',
+  popupButtonSelector: '.popup__button'
+}
+
+export default class FormValidator {
+  constructor(data, form) {
+    this._form = document.querySelector(form);
+    this._popupInputs = Array.from(this._form.querySelectorAll(data.popupInputSelector));
+    this._popupInputError = this._form.querySelector(data.popupInputErrorSelector);
+    this._popupButton = this._form.querySelector(data.popupButtonSelector);
+  }
+
+  enableValidation(){
+  }
+
+  _setEventListeners(){
+    this._popupInput
+  }
+}

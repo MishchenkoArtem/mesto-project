@@ -12,7 +12,7 @@ export default class PopupWithForm extends Popup {
         this.addEventListener('submit', (evt) => {
             evt.preventDefault();
             this._submitApiMethod(this._getInputsValues);
-            this.reset();
+            this.close();
         })
     }
 

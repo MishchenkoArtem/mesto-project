@@ -1,7 +1,7 @@
 import "../pages/index.css";
 import { changeAvatar, editForm } from "./modal.js";
 import { createCard } from "./card.js";
-import { validationConfig, enableValidation } from "./validate.js";
+import { validationConfig, enableValidation } from "./Validate.js";
 import { openPopup, closePopup } from "./utils.js";
 import { getAppInfo } from "./api.js";
 import {
@@ -102,7 +102,7 @@ export const openCardImagePopup = new PopupWithImage('.popup__open-img');
 openCardImagePopup.setEventListeners();
 
 /*Попап с формой создания карточки*/
-export const createCardPopup = new PopupWithForm('.popup__card', (formInputsValues) => {
+export const createCardPopup = new PopupWithForm('.popup__card', () => {
     /*КОД АПИ ДОБАВИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!*/
 });
 createCardPopup.setEventListeners();
@@ -112,7 +112,7 @@ document.querySelector(".profile__add-button").addEventListener("click", () => {
 });
 
 /*Попап редактирования аватара*/
-export const modifyAvatarPopup = new PopupWithImage('.popup__avatar', (formInputsValues) => {
+export const modifyAvatarPopup = new PopupWithImage('.popup__avatar', () => {
     /*КОД АПИ ДОБАВИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!*/
 });
 modifyAvatarPopup.setEventListeners();
@@ -122,7 +122,7 @@ document.querySelector(".profile__edit-avatar").addEventListener("click", () => 
 });
 
 /*Попап с формой редактирования профиля*/
-export const modifyProfilePopup = new PopupWithForm('.popup__profile', (formInputsValues) => {
+export const modifyProfilePopup = new PopupWithForm('.popup__profile', () => {
     /*КОД АПИ ДОБАВИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!*/
 });
 modifyProfilePopup.setEventListeners();
