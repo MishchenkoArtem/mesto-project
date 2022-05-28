@@ -1,35 +1,18 @@
 import Api from "./Api.js";
+import { fetchParams, userId } from "./constants.js";
 const api = new Api(fetchParams);
 
-import {
-  btnAddCard,
-  cardImage,
-  cardList,
-  cardName,
-  cardTemplate,
-  fetchParams,
-  formCardElement,
-  popupCard,
-  popupImage,
-  popupPicture,
-  popupPictureCaption,
-  userId
-} from "./constants.js";
-
-import {
-  closePopup,
-  openPopup
-} from "./utils.js";
-
-// --------------------------------------------------------------------------------- Класс Card
 export default class Card {
-  constructor({name, link, likes, owner, _id}, selector) {
+  constructor({name, link, likes, owner, _id}, selector, handleCardClick) {
     this._name = name;
     this._link = link;
     this._likes = likes;
     this._ownerId = owner._id;
     this._cardId = _id;
+
     this._selector = selector;
+    
+    this._handleCardClick = handleCardClick;
   }
 
   _getElement() {
@@ -44,22 +27,26 @@ export default class Card {
 
   generate() {
     this._element = this._getElement();
-    this._setEventListener();
 
     this._element.querySelector('.card__heading').textContent = this._name;
-    this._element.querySelector('.card__image').src = this._link;
+    this._cardImage = this._element.querySelector('.card__image').src = this._link;
     this._cardLike = this._element.querySelector('.card__heart');
     this._cardCounter = this._element.querySelector('.card__likes-counter');
     this._element.querySelector('.card__delete');
-
+    
+    this._setEventListener();
     return this._element;
   }
 
   //  Метод слушатель событий
   _setEventListener() {
-    this._element.querySelector('.card__heart').addEventListener('click', () => {
+    this._cardLike.addEventListener('click', () => {
       this._handleLikeClick();
     });
+
+    this._cardImage.addEventListener('click', () => {
+      this._handleCardClick();
+    })
   }
 
   //  Метод добавления и удаления лайков
