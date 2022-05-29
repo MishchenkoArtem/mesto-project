@@ -3,27 +3,30 @@ import Api from "../components/Api";
 import Section from "../components/Section";
 import Card from '../components/Card.js';
 import UserInfo from '../components/UserInfo.js'
-import { cardListSection, fetchParams, profileAvatar, profileInfo, profileName, btnSaveAvatar, userInfoSelectorsList, nameInput, jobInput} from "../components/constants";
+import { cardListSection, fetchParams, profileAvatar, profileInfo, profileName, btnSaveAvatar, userInfoSelectorsList, nameInput, jobInput, userId} from "../components/constants";
 
 const api = new Api(fetchParams);
 
 const userInfo = new UserInfo(userInfoSelectorsList, api.getUser())
 
-const addCards = new Section(
-  item => {
-    const cards = new Card(item, '.template__card', (cardId) => api.sendLike(cardId), (cardId) => api.removeLike(cardId), (cardId) => api.deleteCard(cardId));
-    const cardElement = cards.generate()
-    addCards.setItem(cardElement);
-  }, cardListSection);
+
 
 api
   .getAppInfo()
   .then(res => {
-    const [{ name, about, avatar }, cardData] = res;
+    const [{ name, about, avatar, _id }, cardData] = res;
 
     profileName.textContent = name;
     profileInfo.textContent = about;
     profileAvatar.src = avatar;
+    const userId = _id
+
+    const addCards = new Section(
+    item => {
+      const cards = new Card(item, '.template__card', (cardId) => api.sendLike(cardId), (cardId) => api.removeLike(cardId), (cardId) => api.deleteCard(cardId), userId);
+      const cardElement = cards.generate()
+      addCards.setItem(cardElement);
+    }, cardListSection);
     
     addCards.renderItem(cardData);
   });
