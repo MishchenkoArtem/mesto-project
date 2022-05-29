@@ -1,10 +1,13 @@
 import "../pages/index.css";
 import Api from "../components/Api";
 import Section from "../components/Section";
-import Card from '../components/Card.js'
-import { cardListSection, fetchParams, profileAvatar, profileInfo, profileName, btnSaveAvatar} from "../components/constants";
+import Card from '../components/Card.js';
+import UserInfo from '../components/UserInfo.js'
+import { cardListSection, fetchParams, profileAvatar, profileInfo, profileName, btnSaveAvatar, userInfoSelectorsList, nameInput, jobInput} from "../components/constants";
 
 const api = new Api(fetchParams);
+
+const userInfo = new UserInfo(userInfoSelectorsList, api.getUser())
 
 const addCards = new Section(
   item => {
@@ -33,6 +36,7 @@ import PopupWithForm from "../components/PopupWithForm";
 import FormValidator from "../components/FormValidator";
 
 import {popupCard, popupProfile, popupAvatar, formsElementsSelectors} from "../components/constants";
+import {assertBoolean} from "@babel/core/lib/config/validation/option-assertions";
 
 //  Попап открытия картинки
 export const openCardImagePopup = new PopupWithImage('.popup__open-img');
@@ -85,8 +89,7 @@ export const modifyProfilePopup = new PopupWithForm('.popup__profile', (inputsVa
   api
     .profileUpdate(inputsValues)
     .then(res => {
-      profileName.textContent = res.name;
-      profileInfo.textContent = res.about;
+        userInfo.setUserInfo(res);
     })
     .catch((err) => console.log(err))
     .finally(() => {
@@ -96,6 +99,8 @@ export const modifyProfilePopup = new PopupWithForm('.popup__profile', (inputsVa
 modifyProfilePopup.setEventListeners();
 
 document.querySelector(".profile__edit-button").addEventListener("click", () => {
+    nameInput.value = userInfo.getUserInfo().name;
+    jobInput.value = userInfo.getUserInfo().about;
     modifyProfilePopup.open();
 });
 

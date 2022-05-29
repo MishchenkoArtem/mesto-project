@@ -4,12 +4,14 @@ export default class PopupWithForm extends Popup {
     constructor(popupSelector, submitApiMethod) {
         super(popupSelector);
         this._submitApiMethod = submitApiMethod;
+        this._button = this._popupSelector.querySelector('.popup__button');
     }
 
     setEventListeners() {
         super.setEventListeners();
 
         this._popupSelector.addEventListener('submit', (evt) => {
+            this._button.textContent = 'Сохранить...'
             evt.preventDefault();
             
             this._submitApiMethod(this._getInputsValues());
@@ -21,6 +23,12 @@ export default class PopupWithForm extends Popup {
         this._popupSelector.querySelector('.popup__form').reset();
         super.close();
         
+    }
+
+    open(){
+        this._button.classList.add('popup__button_inactive');
+        this._button.disabled = true;
+        super.open();
     }
 
     _getInputsValues() {

@@ -28,6 +28,10 @@ export const formsElementsSelectors = {
   popupButtonSelector: '.popup__button'
 }
 
+export const userInfoSelectorsList = {
+  profileNameSelector: '.profile__name',
+  profileInfoSelector: '.profile__info'
+}
 
 export const fetchParams = {
   baseUrl: "https://nomoreparties.co/v1/plus-cohort-9",
