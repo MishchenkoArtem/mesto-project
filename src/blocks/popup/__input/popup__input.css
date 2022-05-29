@@ -1,6 +1,6 @@
 .popup__input {
     margin: 0;
-    padding: 13px 0;
+    padding: 13px 10px;
     border: 0;
     border-bottom: solid rgba(0, 0, 0, 0.8) 1px;
     font-family: inherit;
@@ -15,5 +15,7 @@
     .popup__input {
         max-width: 238px;
         width: 100%;
+        padding-left: 5px;
+        padding-right: 5px;
     }
 }
