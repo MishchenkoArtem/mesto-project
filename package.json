@@ -4,7 +4,7 @@
   "description": "### Работа выполнена с использованием:",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf dist && webpack --mode production",
+    "build": "rd /s /q dist && webpack",
     "dev": "webpack serve",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"

@@ -27,7 +27,7 @@ api
       const cardElement = cards.generate()
       addCards.setItem(cardElement);
     }, cardListSection);
-    
+
     addCards.renderItem(cardData);
   });
 
@@ -50,6 +50,7 @@ export const createCardPopup = new PopupWithForm('.popup__card', (inputsValues) 
   api
     .newPostCard(inputsValues)
     .then(res => {
+        console.log(res);
       addCards.renderItem(res);
     })
     .catch((err) => console.log(err))

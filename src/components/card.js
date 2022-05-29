@@ -46,9 +46,9 @@ export default class Card {
       this._handleLikeClick();
     });
 
-    this._cardDelete.addEventListener('click', () => {
+    this._cardDelete.addEventListener('click', (evt) => {
       console.log('карта удалена');
-      this._handleDeleteCard();
+      this._handleDeleteCard(evt);
       
     });
 
@@ -73,7 +73,7 @@ export default class Card {
     this._cardCounter.textContent = this._likes.length.toString();
     if (likesArr.length < 1) return false
     likesArr.forEach((like) => {
-        if (like._id === this._owner._id) this._cardLike.classList.add('card__heart_type_active')
+        if (like._id === this._userId) this._cardLike.classList.add('card__heart_type_active')
       return false
     });
   }
@@ -82,10 +82,8 @@ export default class Card {
     if (this._owner._id !== this._userId) this._cardDelete.classList.add('card__delete_visible');
   }
 
-  _handleDeleteCard(){
-    if (this._cardDelete.classList.contains('card__delete')) {
-      this._cardDelete.remove();
-      this._deleteCardCallback();
+  _handleDeleteCard(evt){
+    this._deleteCardCallback(this._cardId)
+        .then (res => evt.target.closest('.card__background').remove())
     }
-  }
 }
