@@ -1,17 +1,16 @@
-import { handleCardLikeClick, openCardImagePopup } from "../pages/index.js";
-import Api from "./Api.js";
-import { fetchParams, userId } from "./constants.js";
-import PopupWithImage from "./PopupWithImage.js";
-const api = new Api(fetchParams);
+import {openCardImagePopup} from "../pages/index.js";
 
 export default class Card {
-  constructor(data, selector) {
+  constructor(data, selector, likeCardCallBack, dislikeCardCallback, deleteCardCallback) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
     this._owner = data.owner;
-
     this._selector = selector;
+    this._cardId = data._id;
+    this._likeCardCallback = likeCardCallBack;
+    this._dislikeCardCallback = dislikeCardCallback;
+    this._deleteCardCallback = deleteCardCallback;
   }
 
   _getElement() {
@@ -34,21 +33,20 @@ export default class Card {
     this._cardDelete = this._element.querySelector('.card__delete');
     this._cardImage.src = this._link;
     this._cardHeading.textContent = this._name;
-    
+
+    this._isLiked(this._likes);
     this._setEventListener();
-    this._handleLikeClick();
     return this._element;
   }
 
   _setEventListener() {
     this._cardLike.addEventListener('click', () => {
       this._handleLikeClick();
-      console.log('лайк есть');
     });
 
     this._cardDelete.addEventListener('click', () => {
       this._handleDeleteCard();
-    })
+    });
 
     this._cardImage.addEventListener('click', (evt) => {
       openCardImagePopup.open(evt);
@@ -56,14 +54,34 @@ export default class Card {
   }
 
   _handleLikeClick() {
-    this._cardCounter.textContent = this._likes.length.toString();
-    const likeActive = document.querySelector('.card__heart_type_active');
-    if (this._owner._id === this._userId) {
-      this._cardLike.classList.add(likeActive);
-    } else {
-      this._cardLike.classList.remove(likeActive);
+    if (this._cardLike.classList.contains('card__heart_type_active')){
+      this._cardLike.classList.remove('card__heart_type_active');
+      this._dislikeCardCallback(this._cardId)
+          .then(res => this._cardCounter.textContent = res.likes.length)
+    }else {
+      this._cardLike.classList.add('card__heart_type_active');
+      console.log(this._cardId);
+      this._likeCardCallback(this._cardId)
+          .then(res => this._cardCounter.textContent = res.likes.length)
     }
-  };
+  }
+
+  _isLiked = (likesArr) => {
+    this._cardCounter.textContent = this._likes.length.toString();
+    if (likesArr.length < 1) return false
+    likesArr.forEach((like) => {
+        if (like._id === this._owner._id) this._cardLike.classList.add('card__heart_type_active')
+      return false
+    });
+  }
+
+  _isDeleteAllowed() {
+    if (this._owner._id !== this._cardId) this._cardDelete.classList.add('')
+  }
+
+  _handleDeleteCard(){
+
+  }
 }
 
 // ---------------------------------------------------------------------------- Форма создания карточки

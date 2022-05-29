@@ -54,6 +54,7 @@ export default class Api {
 
   // Добаление лайка карточки
   sendLike(likes) {
+    console.log(`${this.baseUrl}/cards/likes/${likes}`)
     return fetch(`${this.baseUrl}/cards/likes/${likes}`, {
       method: "PUT",
       headers: this.headers,
@@ -69,12 +70,12 @@ export default class Api {
   }
 
   // Удаление карточки
-  // deleteCard(cardId) {
-  //   return fetch(`${this.baseUrl}/cards/${cardId}`, {
-  //     method: "DELETE",
-  //     headers: this.headers,
-  //   }).then((res) => this.getResponseData(res));
-  // }
+  deleteCard(cardId) {
+    return fetch(`${this.baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+       headers: this.headers,
+     }).then((res) => this.getResponseData(res));
+   }
 
   // Добавление новой иконки пользователя
   avatarUpdate(avatar) {

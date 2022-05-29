@@ -11,7 +11,7 @@ const userInfo = new UserInfo(userInfoSelectorsList, api.getUser())
 
 const addCards = new Section(
   item => {
-    const cards = new Card(item, '.template__card');
+    const cards = new Card(item, '.template__card', (cardId) => api.sendLike(cardId), (cardId) => api.removeLike(cardId), (cardId) => api.deleteCard(cardId));
     const cardElement = cards.generate()
     addCards.setItem(cardElement);
   }, cardListSection);
