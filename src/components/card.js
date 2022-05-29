@@ -1,4 +1,4 @@
-import { openCardImagePopup } from "../pages/index.js";
+import { handleCardLikeClick, openCardImagePopup } from "../pages/index.js";
 import Api from "./Api.js";
 import { fetchParams, userId } from "./constants.js";
 import PopupWithImage from "./PopupWithImage.js";
@@ -9,6 +9,7 @@ export default class Card {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
+    this._owner = data.owner;
 
     this._selector = selector;
   }
@@ -30,53 +31,39 @@ export default class Card {
     this._cardImage = this._element.querySelector('.card__image');
     this._cardLike = this._element.querySelector('.card__heart');
     this._cardCounter = this._element.querySelector('.card__likes-counter');
-    this._element.querySelector('.card__delete');
+    this._cardDelete = this._element.querySelector('.card__delete');
     this._cardImage.src = this._link;
     this._cardHeading.textContent = this._name;
     
     this._setEventListener();
+    this._handleLikeClick();
     return this._element;
   }
 
-  //  Метод слушатель событий
   _setEventListener() {
     this._cardLike.addEventListener('click', () => {
       this._handleLikeClick();
+      console.log('лайк есть');
     });
+
+    this._cardDelete.addEventListener('click', () => {
+      this._handleDeleteCard();
+    })
 
     this._cardImage.addEventListener('click', (evt) => {
       openCardImagePopup.open(evt);
     });
   }
 
-  //  Метод добавления и удаления лайков
-  // _handleLikeClick() {
-  //   if (!this._cardLike.classList.contains("card__heart_type_active")) {
-  //     api
-  //     .sendLike(this._cardid)
-  //       .then(() => {
-  //         this._cardLike.classList.add("card__heart_type_active");
-  //         this._cardCounter.textContent = this._likes.length.toString();
-  //       })
-  //       .catch((err) => console.log(err));
-  //   } else {
-  //     api
-  //     .removeLike(this._cardid)
-  //       .then(() => {
-  //         this._cardLike.classList.remove("card__heart_type_active");
-  //         this._cardCounter.textContent = this._likes.length.toString();
-  //       })
-  //       .catch((err) => console.log(err));
-  //   }
-
-  //   this._cardCounter.textContent = this._likes.length.toString();
-  //   const isLiked = Boolean(this._likes.find((user) => user._id === userId));
-  //   if (isLiked) {
-  //     this._cardLike.classList.add("card__heart_type_active");
-  //   } else {
-  //     this._cardLike.classList.remove("card__heart_type_active");
-  //   }
-  // };
+  _handleLikeClick() {
+    this._cardCounter.textContent = this._likes.length.toString();
+    const likeActive = document.querySelector('.card__heart_type_active');
+    if (this._owner._id === this._userId) {
+      this._cardLike.classList.add(likeActive);
+    } else {
+      this._cardLike.classList.remove(likeActive);
+    }
+  };
 }
 
 // ---------------------------------------------------------------------------- Форма создания карточки
