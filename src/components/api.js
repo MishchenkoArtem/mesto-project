@@ -41,14 +41,13 @@ export default class Api {
   }
 
   // Добавление новой карточки
-  newPostCard(cardName, cardImage, ownerId) {
+  newPostCard(cardInfo) {
      return fetch(`${this.baseUrl}/cards`, {
        method: "POST",
        headers: this.headers,
        body: JSON.stringify({
-         name: cardName,
-         link: cardImage,
-         owner: ownerId,
+         name: cardInfo.cardName,
+         link: cardInfo.cardImage
        }),
      }).then((res) => this.getResponseData(res));
   }
