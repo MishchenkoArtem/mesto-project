@@ -25,42 +25,6 @@ api
     addCards.renderItem(cardData);
   });
 
-/* document
-  .querySelector(".profile__edit-button")
-  .addEventListener("click", () => {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileInfo.textContent;
-    openPopup(popupProfile);
-  });
-
-popupProfile.querySelector(".popup__close").addEventListener("click", () => {
-  closePopup(popupProfile);
-});
-
-popupCard.querySelector(".popup__close").addEventListener("click", () => {
-  closePopup(popupCard);
-});
-
-popupImage.querySelector(".popup__close").addEventListener("click", () => {
-  closePopup(popupImage);
-});
-
-document
-  .querySelector(".profile__edit-avatar")
-  .addEventListener("click", () => {
-    openPopup(popupAvatar);
-  });
-
-popupAvatar.querySelector(".popup__close").addEventListener("click", () => {
-  closePopup(popupAvatar);
-});
-
-formProfileElement.addEventListener("submit", editForm);
-
-formAvatarElement.addEventListener("submit", changeAvatar);
-
-enableValidation(validationConfig); */
-
 // -----------------------------------------------------Блок работы с popups
 // Импорты
 
