@@ -7,11 +7,27 @@ const presets = [
         chrome: '64',
         safari: '11.1'
       },
+
   
       // использовать полифиллы для браузеров из свойства target
       // по умолчанию babel использует поллифиллы библиотеки core-js
       useBuiltIns: "entry"
     }]
+
   ];
   
-  module.exports = { presets };
+  module.exports = {
+    presets,
+    "plugins": [
+      [
+        "@babel/plugin-transform-runtime",
+        {
+          "absoluteRuntime": false,
+          "corejs": false,
+          "helpers": true,
+          "regenerator": true,
+          "version": "7.0.0-beta.0"
+        }
+      ]
+    ]
+  };
