@@ -1,9 +1,18 @@
 export default class FormValidator {
-    constructor(data, form) {
+    constructor({
+        popupInputSelector,
+        popupInputErrorSelector,
+        popupButtonSelector,
+        popupInputErrorActive,
+        popupButtonInactive },
+        form) {
+        
         this._form = form;
-        this._popupInputs = Array.from(this._form.querySelectorAll(data.popupInputSelector));
-        this._popupInputError = this._form.querySelector(data.popupInputErrorSelector);
-        this._popupButton = this._form.querySelector(data.popupButtonSelector);
+        this._popupInputs = Array.from(this._form.querySelectorAll(popupInputSelector));
+        this._popupInputError = this._form.querySelector(popupInputErrorSelector);
+        this._popupButton = this._form.querySelector(popupButtonSelector);
+        this._popupErrorActive = popupInputErrorActive;
+        this._popupBtnInactive = popupButtonInactive;
     }
 
     enableValidation(){
@@ -36,12 +45,12 @@ export default class FormValidator {
 
     _showValidationError = (errorMessageSpan, errorMessage) => {
         errorMessageSpan.textContent = errorMessage;
-        errorMessageSpan.classList.add('popup__input-error_active');
+        errorMessageSpan.classList.add('this._popupErrorActive');
     }
 
     _hideValidationError = (errorMessageSpan) => {
         errorMessageSpan.textContent = '';
-        errorMessageSpan.classList.remove('popup__input-error_active');
+        errorMessageSpan.classList.remove('this._popupErrorActive');
     }
 
     _checkAllInputsValidity = (inputsList) => {
@@ -51,12 +60,12 @@ export default class FormValidator {
     }
 
     _disableSubmitButton = (button) => {
-        button.classList.add('popup__button_inactive');
+        button.classList.add('this._popupBtnInactive');
         button.disabled = true;
     }
 
     _enableSubmitButton = (button) => {
-        button.classList.remove('popup__button_inactive');
+        button.classList.remove('this._popupBtnInactive');
         button.disabled = false;
     }
 }
