@@ -20,12 +20,13 @@ export const cardName = document.forms.formCard.cardName;
 export const cardImage = document.forms.formCard.cardImage;
 export const formAvatarElement = document.forms.formAvatar;
 export const avatarInput = document.forms.formAvatar.avatar;
-export let userId = null;
 
 export const formsElementsSelectors = {
   popupInputSelector: '.popup__input',
   popupInputErrorSelector: '.popup__input-error',
-  popupButtonSelector: '.popup__button'
+  popupButtonSelector: '.popup__button',
+  popupInputErrorActive: 'popup__input- error_active',
+  popupButtonInactive: 'popup__button_inactive'
 }
 
 export const userInfoSelectorsList = {
