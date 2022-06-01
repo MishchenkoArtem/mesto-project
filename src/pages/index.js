@@ -26,21 +26,23 @@ import {cardListSection,
         popupCard,
         popupProfile,
         popupAvatar,
-        formsElementsSelectors} from "../components/constants";
+  formsElementsSelectors,
+  cardsElementsSelectors
+} from "../components/constants";
 //-------------------------------------------------------------------------------
 //-----Создаём экземпляры классов
 //-------------------------------------------------------------------------------
     //Класс обращений к серверу
 const api = new Api(fetchParams);
     //Класс получения информации о пользователе
-const userInfo = new UserInfo(userInfoSelectorsList)
+const userInfo = new UserInfo(userInfoSelectorsList, () => api.getUser())
     //Универсальный Класс для отрисовки объектов
 const addCards = new Section(
     (item, userId) => {
-        const cards = new Card(item, '.template__card', (cardId) => api.sendLike(cardId), (cardId) => api.removeLike(cardId), (cardId) => api.deleteCard(cardId), userId);
+    const cards = new Card(item, '.template__card', (cardId) => api.sendLike(cardId), (cardId) => api.removeLike(cardId), (cardId) => api.deleteCard(cardId), userId, cardsElementsSelectors, openCardImagePopup);
         const cardElement = cards.generate()
         addCards.setItem(cardElement);
-    }, cardListSection, () => api.getUser());
+  }, cardListSection, () => api.getUser());
 //-------------------------------------------------------------------------------
 //-----Отрисовываем стартовую страницу
 //-------------------------------------------------------------------------------
@@ -65,12 +67,12 @@ export const createCardPopup = new PopupWithForm('.popup__card', (inputsValues) 
   api
     .newPostCard(inputsValues)
     .then(res => {
-        console.log(res);
       addCards.renderItem(res);
     })
     .catch((err) => console.log(err))
     .finally(() => {
       btnSaveAvatar.textContent = "Сохранить";
+      createCardPopup.close();
     });
 })
         //вешаем лиссенеры на инпуты формы
@@ -94,6 +96,7 @@ export const modifyAvatarPopup = new PopupWithForm('.popup__avatar', (inputsValu
     .catch((err) => console.log(err))
     .finally(() => {
       btnSaveAvatar.textContent = "Сохранить";
+      modifyAvatarPopup.close();
     });
 });
 modifyAvatarPopup.setEventListeners();
@@ -115,6 +118,7 @@ export const modifyProfilePopup = new PopupWithForm('.popup__profile', (inputsVa
     .catch((err) => console.log(err))
     .finally(() => {
       btnSaveAvatar.textContent = "Сохранить";
+      modifyProfilePopup.close();
     });
 });
 modifyProfilePopup.setEventListeners();
