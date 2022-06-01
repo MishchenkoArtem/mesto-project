@@ -15,14 +15,12 @@ export default class PopupWithForm extends Popup {
             evt.preventDefault();
             
             this._submitApiMethod(this._getInputsValues());
-            this.close();
         })
     }
 
     close() {
         this._popupSelector.querySelector('.popup__form').reset();
         super.close();
-        
     }
 
     open(){
