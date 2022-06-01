@@ -21,10 +21,10 @@ export default class Card {
 
   _getElement() {
     const cardElement = document
-    .querySelector(this._selector)
-    .content
-    .querySelector('.card__background')
-    .cloneNode(true);
+      .querySelector(this._selector)
+      .content
+      .querySelector('.card__background')
+      .cloneNode(true);
 
     return cardElement;
   }
@@ -53,7 +53,7 @@ export default class Card {
 
     this._cardDelete.addEventListener('click', (evt) => {
       this._handleDeleteCard(evt);
-      
+
     });
 
     this._cardImage.addEventListener('click', (evt) => {
@@ -62,14 +62,14 @@ export default class Card {
   }
 
   _handleLikeClick() {
-    if (this._cardLike.classList.contains(this._cardLikeActiveSelector)){
+    if (this._cardLike.classList.contains(this._cardLikeActiveSelector)) {
       this._cardLike.classList.remove(this._cardLikeActiveSelector);
       this._dislikeCardCallback(this._cardId)
-          .then(res => this._cardCounter.textContent = res.likes.length)
-    }else {
+        .then(res => this._cardCounter.textContent = res.likes.length)
+    } else {
       this._cardLike.classList.add(this._cardLikeActiveSelector);
       this._likeCardCallback(this._cardId)
-          .then(res => this._cardCounter.textContent = res.likes.length)
+        .then(res => this._cardCounter.textContent = res.likes.length)
     }
   }
 
@@ -86,8 +86,8 @@ export default class Card {
     if (this._owner._id !== this._userId) this._cardDelete.classList.add(this._cardDeleteVisibleSelector);
   }
 
-  _handleDeleteCard(evt){
+  _handleDeleteCard(evt) {
     this._deleteCardCallback(this._cardId)
       .then(res => evt.target.closest(`.${this._cardContainerSelector}`).remove());
-    }
+  }
 }
