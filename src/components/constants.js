@@ -25,8 +25,14 @@ export const formsElementsSelectors = {
   popupInputSelector: '.popup__input',
   popupInputErrorSelector: '.popup__input-error',
   popupButtonSelector: '.popup__button',
-  popupInputErrorActive: 'popup__input- error_active',
+  popupInputErrorActive: 'popup__input-error_active',
   popupButtonInactive: 'popup__button_inactive'
+}
+
+export const cardsElementsSelectors = {
+  cardLikeActiveSelector: 'card__heart_type_active',
+  cardDeleteVisibleSelector: 'card__delete_visible',
+  cardContainerSelector: 'card__background'
 }
 
 export const userInfoSelectorsList = {

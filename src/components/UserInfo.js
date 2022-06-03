@@ -1,14 +1,23 @@
 // Отвечает за управление информацией о пользователе на странице
 
 export default class UserInfo{
-    constructor(userInfoSelectorsList){
+    constructor(userInfoSelectorsList, getUserCallback) {
         this._profileName = document.querySelector(userInfoSelectorsList.profileNameSelector);
         this._profileInfo = document.querySelector(userInfoSelectorsList.profileInfoSelector);
+        this._getUserCallback = getUserCallback;
     }
     // Возвращает объект с данными пользователя
-    getUserInfo(){
-        return {name: this._profileName.textContent, about: this._profileInfo.textContent}
-    }
+    getUserInfo() {
+        this._getUserCallback()
+            .then(res => {
+                return  {
+                    name: res.name,
+                    about: res.about,
+                    avatar: res.avatar,
+                    userId: res._id
+                }
+            });
+}
 
     // Принимает новые данные пользователя, отправляет их на сервер и добавляет их на страницу
     setUserInfo(newUserInfo) {

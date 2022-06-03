@@ -45,12 +45,12 @@ export default class FormValidator {
 
     _showValidationError = (errorMessageSpan, errorMessage) => {
         errorMessageSpan.textContent = errorMessage;
-        errorMessageSpan.classList.add('this._popupErrorActive');
+        errorMessageSpan.classList.add(this._popupErrorActive);
     }
 
     _hideValidationError = (errorMessageSpan) => {
         errorMessageSpan.textContent = '';
-        errorMessageSpan.classList.remove('this._popupErrorActive');
+        errorMessageSpan.classList.remove(this._popupErrorActive);
     }
 
     _checkAllInputsValidity = (inputsList) => {
@@ -60,12 +60,12 @@ export default class FormValidator {
     }
 
     _disableSubmitButton = (button) => {
-        button.classList.add('this._popupBtnInactive');
+        button.classList.add(this._popupBtnInactive);
         button.disabled = true;
     }
 
     _enableSubmitButton = (button) => {
-        button.classList.remove('this._popupBtnInactive');
+        button.classList.remove(this._popupBtnInactive);
         button.disabled = false;
     }
 }
