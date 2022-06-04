@@ -1,5 +1,5 @@
 export default class Api {
-  constructor({baseUrl, headers}) {
+  constructor({ baseUrl, headers }) {
     this.baseUrl = baseUrl;
     this.headers = headers;
   }
@@ -42,14 +42,14 @@ export default class Api {
 
   // Добавление новой карточки
   newPostCard(cardInfo) {
-     return fetch(`${this.baseUrl}/cards`, {
-       method: "POST",
-       headers: this.headers,
-       body: JSON.stringify({
-         name: cardInfo.cardName,
-         link: cardInfo.cardImage
-       }),
-     }).then((res) => this.getResponseData(res));
+    return fetch(`${this.baseUrl}/cards`, {
+      method: "POST",
+      headers: this.headers,
+      body: JSON.stringify({
+        name: cardInfo.cardName,
+        link: cardInfo.cardImage
+      }),
+    }).then((res) => this.getResponseData(res));
   }
 
   // Добаление лайка карточки
@@ -72,9 +72,9 @@ export default class Api {
   deleteCard(cardId) {
     return fetch(`${this.baseUrl}/cards/${cardId}`, {
       method: "DELETE",
-       headers: this.headers,
-     }).then((res) => this.getResponseData(res));
-   }
+      headers: this.headers,
+    }).then((res) => this.getResponseData(res));
+  }
 
   // Добавление новой иконки пользователя
   avatarUpdate(avatar) {
