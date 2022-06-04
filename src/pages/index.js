@@ -36,7 +36,7 @@ import {
 //Класс обращений к серверу
 const api = new Api(fetchParams);
 //Класс получения информации о пользователе
-const userInfo = new UserInfo(userInfoSelectorsList, () => api.getUser())
+const userInfo = new UserInfo(userInfoSelectorsList, nameInput, jobInput, () => api.getUser(), (newUserInfo) => api.profileUpdate(newUserInfo))
 //Универсальный Класс для отрисовки объектов
 const addCards = new Section(
   (item, userId) => {
@@ -111,22 +111,14 @@ modifyAvatarPopupValidation.enableValidation();
 
 //Попап с формой редактирования профиля
 export const modifyProfilePopup = new PopupWithForm('.popup__profile', (inputsValues) => {
-  api
-    .profileUpdate(inputsValues)
-    .then(res => {
-      userInfo.setUserInfo(res);
-    })
-    .catch((err) => console.log(err))
-    .finally(() => {
-      btnSaveAvatar.textContent = "Сохранить";
-      modifyProfilePopup.close();
-    });
+    userInfo.setUserInfo(inputsValues);
+    btnSaveAvatar.textContent = "Сохранить";
+    modifyProfilePopup.close();
 });
 modifyProfilePopup.setEventListeners();
 
 document.querySelector(".profile__edit-button").addEventListener("click", () => {
-  nameInput.value = userInfo.getUserInfo().name;
-  jobInput.value = userInfo.getUserInfo().about;
+  userInfo.getUserInfo();
   modifyProfilePopup.open();
 });
 

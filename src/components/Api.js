@@ -29,13 +29,13 @@ export default class Api {
   }
 
   // Обновление данных пользователя
-  profileUpdate(userInfo) {
+  profileUpdate(newUserInfo) {
     return fetch(`${this.baseUrl}/users/me`, {
       method: "PATCH",
       headers: this.headers,
       body: JSON.stringify({
-        name: userInfo.nameProfile,
-        about: userInfo.professionProfile
+        name: newUserInfo.nameProfile,
+        about: newUserInfo.professionProfile
       }),
     }).then((res) => this.getResponseData(res));
   }
