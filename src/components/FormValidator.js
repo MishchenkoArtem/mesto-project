@@ -2,10 +2,10 @@ export default class FormValidator {
     constructor(
         {
             popupInputSelector,
-            popupInputErrorSelector,
             popupButtonSelector,
             popupInputErrorActive,
             popupButtonInactive,
+            popupInputErrorSelector,
         },
         form
     ) {
@@ -13,12 +13,10 @@ export default class FormValidator {
         this._popupInputs = Array.from(
             this._form.querySelectorAll(popupInputSelector)
         )
-        // this._popupInputError = this._form.querySelector(
-        //     popupInputErrorSelector
-        // ) 
         this._popupButton = this._form.querySelector(popupButtonSelector)
         this._popupErrorActive = popupInputErrorActive
         this._popupBtnInactive = popupButtonInactive
+        this._popupInputErrorsList = this._form.querySelectorAll(popupInputErrorSelector)
     }
 
     enableValidation() {
@@ -30,9 +28,9 @@ export default class FormValidator {
             input.addEventListener('input', (evt) => {
                 this._checkInputValidity(evt.target)
                 if (this._checkAllInputsValidity(this._popupInputs)) {
-                    this._disableSubmitButton(this._popupButton)
+                    this.disableSubmitButton()
                 } else {
-                    this._enableSubmitButton(this._popupButton)
+                    this._enableSubmitButton()
                 }
             })
         })
@@ -61,19 +59,25 @@ export default class FormValidator {
         errorMessageSpan.classList.remove(this._popupErrorActive)
     }
 
+    hideAllValidationErrors() {
+        this._popupInputErrorsList.forEach((item) => {
+            this._hideValidationError(item)
+        })
+    }
+
     _checkAllInputsValidity = (inputsList) => {
         return inputsList.some((input) => {
             return !input.validity.valid
         })
     }
 
-    _disableSubmitButton = (button) => {
-        button.classList.add(this._popupBtnInactive)
-        button.disabled = true
+    disableSubmitButton = () => {
+        this._popupButton.classList.add(this._popupBtnInactive)
+        this._popupButton.disabled = true
     }
 
-    _enableSubmitButton = (button) => {
-        button.classList.remove(this._popupBtnInactive)
-        button.disabled = false
+    _enableSubmitButton = () => {
+        this._popupButton.classList.remove(this._popupBtnInactive)
+        this._popupButton.disabled = false
     }
 }
