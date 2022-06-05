@@ -13,9 +13,9 @@ export default class FormValidator {
         this._popupInputs = Array.from(
             this._form.querySelectorAll(popupInputSelector)
         )
-        this._popupInputError = this._form.querySelector(
-            popupInputErrorSelector
-        )
+        // this._popupInputError = this._form.querySelector(
+        //     popupInputErrorSelector
+        // ) 
         this._popupButton = this._form.querySelector(popupButtonSelector)
         this._popupErrorActive = popupInputErrorActive
         this._popupBtnInactive = popupButtonInactive
