@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="84397eda-4f2f-4d01-95f6-ebdbe1ba42de" name="Changes" comment="Дополнил">
-      <change beforePath="$PROJECT_DIR$/src/components/Api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Api.js" afterDir="false" />
+    <list default="true" id="84397eda-4f2f-4d01-95f6-ebdbe1ba42de" name="Changes" comment="Полностью закончил правки">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/UserInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UserInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/constants.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +65,8 @@
       <workItem from="1653235685019" duration="54327000" />
       <workItem from="1653821134478" duration="18245000" />
       <workItem from="1653851970158" duration="22432000" />
-      <workItem from="1654258982428" duration="7023000" />
+      <workItem from="1654258982428" duration="7399000" />
+      <workItem from="1654443712667" duration="4092000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1653236029147</created>
@@ -164,7 +166,21 @@
       <option name="project" value="LOCAL" />
       <updated>1654258839528</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Полностью закончил правки">
+      <created>1654357603892</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1654357603892</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Полностью закончил правки">
+      <created>1654357781674</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1654357781674</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,7 +220,8 @@
     <MESSAGE value="Настроили удаление карточки" />
     <MESSAGE value="Закончили задание" />
     <MESSAGE value="Дополнил" />
-    <option name="LAST_COMMIT_MESSAGE" value="Дополнил" />
+    <MESSAGE value="Полностью закончил правки" />
+    <option name="LAST_COMMIT_MESSAGE" value="Полностью закончил правки" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

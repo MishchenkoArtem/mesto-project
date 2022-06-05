@@ -40,6 +40,7 @@ export const cardsElementsSelectors = {
 export const userInfoSelectorsList = {
     profileNameSelector: '.profile__name',
     profileInfoSelector: '.profile__info',
+    profileAvatarSelector: '.profile__avatar'
 }
 
 export const fetchParams = {

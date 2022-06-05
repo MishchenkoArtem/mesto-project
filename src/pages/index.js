@@ -36,7 +36,7 @@ import {
 //Класс обращений к серверу
 const api = new Api(fetchParams);
 //Класс получения информации о пользователе
-const userInfo = new UserInfo(userInfoSelectorsList, nameInput, jobInput, () => api.getUser(), (newUserInfo) => api.profileUpdate(newUserInfo))
+const userInfo = new UserInfo(userInfoSelectorsList)
 //Универсальный Класс для отрисовки объектов
 const addCards = new Section(
   (item, userId) => {
@@ -50,10 +50,8 @@ const addCards = new Section(
 api
   .getAppInfo()
   .then(res => {
-    const [{ name, about, avatar }, cardData] = res;
-    profileName.textContent = name;
-    profileInfo.textContent = about;
-    profileAvatar.src = avatar;
+    const [{ name, about, avatar, id }, cardData] = res;
+    userInfo.setUserInfo(res[0]);
     addCards.renderItem(cardData);
   });
 //-------------------------------------------------------------------------------
@@ -69,11 +67,11 @@ export const createCardPopup = new PopupWithForm('.popup__card', (inputsValues) 
     .newPostCard(inputsValues)
     .then(res => {
       addCards.renderItem(res);
+      createCardPopup.close();
     })
     .catch((err) => console.log(err))
     .finally(() => {
       btnSaveAvatar.textContent = "Сохранить";
-      createCardPopup.close();
     });
 })
 //вешаем лиссенеры на инпуты формы
@@ -93,11 +91,11 @@ export const modifyAvatarPopup = new PopupWithForm('.popup__avatar', (inputsValu
     .avatarUpdate(inputsValues)
     .then(res => {
       profileAvatar.src = res.avatar;
+      modifyAvatarPopup.close();
     })
     .catch((err) => console.log(err))
     .finally(() => {
       btnSaveAvatar.textContent = "Сохранить";
-      modifyAvatarPopup.close();
     });
 });
 modifyAvatarPopup.setEventListeners();
@@ -111,14 +109,24 @@ modifyAvatarPopupValidation.enableValidation();
 
 //Попап с формой редактирования профиля
 export const modifyProfilePopup = new PopupWithForm('.popup__profile', (inputsValues) => {
-    userInfo.setUserInfo(inputsValues);
-    btnSaveAvatar.textContent = "Сохранить";
-    modifyProfilePopup.close();
+    api
+        .profileUpdate(inputsValues)
+        .then(res => {
+            userInfo.setUserInfo(res);
+            modifyProfilePopup.close();
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+            btnSaveAvatar.textContent = "Сохранить";
+        })
+
 });
 modifyProfilePopup.setEventListeners();
 
 document.querySelector(".profile__edit-button").addEventListener("click", () => {
-  userInfo.getUserInfo();
+  const userData = userInfo.getUserInfo();
+  nameInput.value = userData.name;
+  jobInput.value = userData.about;
   modifyProfilePopup.open();
 });
 
