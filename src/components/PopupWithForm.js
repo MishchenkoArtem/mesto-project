@@ -1,16 +1,19 @@
 import Popup from './Popup'
 
 export default class PopupWithForm extends Popup {
-    constructor(popupSelector, submitApiMethod) {
-        super(popupSelector)
+    constructor(popupElement, submitApiMethod) {
+        super(popupElement)
+         
         this._submitApiMethod = submitApiMethod
-        this._button = this._popupSelector.querySelector('.popup__button')
+        this._button = this._popupElement.querySelector('.popup__button')
+        this._popupForm = this._popupElement.querySelector('.popup__form')
+        this._formInputsList = this._popupElement.querySelectorAll('.popup__input')
     }
 
     setEventListeners() {
         super.setEventListeners()
 
-        this._popupSelector.addEventListener('submit', (evt) => {
+        this._popupElement.addEventListener('submit', (evt) => {
             this._button.textContent = 'Сохранить...'
             evt.preventDefault()
 
@@ -19,7 +22,7 @@ export default class PopupWithForm extends Popup {
     }
 
     close() {
-        this._popupSelector.querySelector('.popup__form').reset()
+        this._popupForm.reset()
         super.close()
     }
 
@@ -30,8 +33,6 @@ export default class PopupWithForm extends Popup {
     }
 
     _getInputsValues() {
-        this._formInputsList =
-            this._popupSelector.querySelectorAll('.popup__input')
         this._formInputsValues = {}
 
         this._formInputsList.forEach((input) => {
