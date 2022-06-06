@@ -1,5 +1,6 @@
 export default class Section {
     constructor(renderer, selector, getUserCallback) {
+        console.log(getUserCallback)
         this._renderer = renderer
         this._container = document.querySelector(selector)
         this._getUserCallback = getUserCallback

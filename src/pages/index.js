@@ -18,7 +18,6 @@ import UserInfo from '../components/UserInfo.js'
 import {
     cardListSection,
     fetchParams,
-    profileAvatar,
     btnSaveAvatar,
     userInfoSelectorsList,
     nameInput,
@@ -30,18 +29,19 @@ import {
     cardsElementsSelectors,
     btnAddCard,
     btnEditProfile,
-} from '../components/constants'
+} from '../utils/constants'
 
 //-------------------------------------------------------------------------------
 //-----Создаём экземпляры классов
 //-------------------------------------------------------------------------------
 
-//Класс обращений к серверу
+//  Класс обращений к серверу
 const api = new Api(fetchParams)
 
-//Класс получения информации о пользователе
+//  Класс получения информации о пользователе
 const userInfo = new UserInfo(userInfoSelectorsList)
-//Универсальный Класс для отрисовки объектов
+
+//  Универсальный Класс для отрисовки объектов
 const addCards = new Section(
     (item, userId) => {
         const cards = new Card(
@@ -65,10 +65,12 @@ const addCards = new Section(
 //-----Отрисовываем стартовую страницу
 //-------------------------------------------------------------------------------
 
-api.getAppInfo().then((res) => {
-    userInfo.setUserInfo(res[0])
-    addCards.renderItem(res[1])
-})
+api.getAppInfo()
+    .then((res) => {
+        userInfo.setUserInfo(res[0])
+        addCards.renderItem(res[1])
+    })
+    .catch((err) => console.log(err))
 
 //-------------------------------------------------------------------------------
 //-----Настраиваем попапы
@@ -120,7 +122,7 @@ export const modifyAvatarPopup = new PopupWithForm(
     (inputsValues) => {
         api.avatarUpdate(inputsValues)
             .then((res) => {
-                profileAvatar.src = res.avatar
+                userInfo.setUserInfo(res)
                 modifyAvatarPopup.close()
             })
             .catch((err) => console.log(err))
