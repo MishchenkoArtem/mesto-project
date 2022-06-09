@@ -2,15 +2,15 @@ export default class Card {
     constructor(
         data,
         selector,
-        likeCardCallBack,
-        dislikeCardCallback,
-        deleteCardCallback,
-        userId,
         {
             cardLikeActiveSelector,
             cardDeleteVisibleSelector,
             cardContainerSelector,
         },
+        userId,
+        likeCardCallBack,
+        dislikeCardCallback,
+        deleteCardCallback,
         openCardImagePopup
     ) {
         this._name = data.name
@@ -98,18 +98,6 @@ export default class Card {
                 }
             })
             .catch((err) => console.log(err))
-
-        // if (this._cardLike.classList.contains(this._cardLikeActiveSelector)) {
-        //   this._cardLike.classList.remove(this._cardLikeActiveSelector);
-        //   this._dislikeCardCallback(this._cardId).then(
-        //     (res) => (this._cardCounter.textContent = res.likes.length)
-        //   );
-        // } else {
-        //   this._cardLike.classList.add(this._cardLikeActiveSelector);
-        //   this._likeCardCallback(this._cardId).then(
-        //     (res) => (this._cardCounter.textContent = res.likes.length)
-        //   );
-        // }
     }
 
     _isLiked = (likesArr) => {

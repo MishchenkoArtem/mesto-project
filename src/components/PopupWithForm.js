@@ -32,12 +32,6 @@ export default class PopupWithForm extends Popup {
         super.close()
     }
 
-    // open() {
-    //     this._button.classList.add('popup__button_inactive')
-    //     this._button.disabled = true
-    //     super.open()
-    // }
-
     _getInputsValues() {
         this._formInputsValues = {}
 

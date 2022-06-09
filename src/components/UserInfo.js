@@ -1,7 +1,7 @@
 // Отвечает за управление информацией о пользователе на странице
 
 export default class UserInfo{
-    constructor(userInfoSelectorsList) {
+    constructor(userInfoSelectorsList, userId) {
         this._profileName = document.querySelector(userInfoSelectorsList.profileNameSelector);
         this._profileInfo = document.querySelector(userInfoSelectorsList.profileInfoSelector);
         this._profileAvatar = document.querySelector(userInfoSelectorsList.profileAvatarSelector);
@@ -16,9 +16,9 @@ export default class UserInfo{
 }
 
     // Принимает новые данные пользователя, отправляет их на сервер и добавляет их на страницу
-    setUserInfo(newUserInfo) {
-        this._profileName.textContent = newUserInfo.name;
-        this._profileInfo.textContent = newUserInfo.about;
-        this._profileAvatar.src = newUserInfo.avatar;
+    setUserInfo({ name, about, avatar, _id}) {
+        this._profileName.textContent = name
+        this._profileInfo.textContent = about
+        this._profileAvatar.src = avatar
     }
 }

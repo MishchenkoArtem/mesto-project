@@ -1,22 +1,20 @@
 export default class Section {
-    constructor(renderer, selector, getUserCallback) {
-        console.log(getUserCallback)
-        this._renderer = renderer
-        this._container = document.querySelector(selector)
-        this._getUserCallback = getUserCallback
+    constructor({ renderItems }, containerSelector) {
+        this._renderer = renderItems
+        this._container = document.querySelector(containerSelector)
     }
 
-    renderItem(cards) {
-        this._getUserCallback().then((res) => {
-            if (cards.length > 1) {
-                cards.forEach((item) => this._renderer(item, res._id))
-            } else {
-                this._renderer(cards, res._id)
-            }
-        })
+    renderItems(items) {
+        if (Array.from(items).length <= 0) {
+            this._renderer(items)
+        } else {
+            items.forEach((item) => {
+                this._renderer(item)
+            })
+        }
     }
 
-    setItem(element) {
+    addItem(element) {
         this._container.prepend(element)
     }
 }

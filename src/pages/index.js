@@ -29,7 +29,8 @@ import {
     cardsElementsSelectors,
     btnAddCard,
     btnEditProfile,
-} from '../utils/constants'
+} from '../utils/constants.js'
+import { data } from 'autoprefixer'
 
 //-------------------------------------------------------------------------------
 //-----Создаём экземпляры классов
@@ -39,55 +40,54 @@ import {
 const api = new Api(fetchParams)
 
 //  Класс получения информации о пользователе
-const userInfo = new UserInfo(userInfoSelectorsList)
-
-//  Универсальный Класс для отрисовки объектов
-const addCards = new Section(
-    (item, userId) => {
-        const cards = new Card(
-            item,
-            '.template__card',
-            (cardId) => api.sendLike(cardId),
-            (cardId) => api.removeLike(cardId),
-            (cardId) => api.deleteCard(cardId),
-            userId,
-            cardsElementsSelectors,
-            openCardImagePopup
-        )
-        const cardElement = cards.generate()
-        addCards.setItem(cardElement)
-    },
-    cardListSection,
-    () => api.getUser()
-)
+const userInfo = new UserInfo(userInfoSelectorsList, userId)
 
 //-------------------------------------------------------------------------------
 //-----Отрисовываем стартовую страницу
 //-------------------------------------------------------------------------------
 
+let userId
+
+const createCard = (data) => {
+    const card = new Card(
+        data,
+        '.template__card',
+        cardsElementsSelectors,
+        userId,
+        (item) => api.sendLike(item),
+        (item) => api.removeLike(item),
+        (item) => api.deleteCard(item),
+        openCardImagePopup
+    )
+    const cardElement = card.generate(data)
+    return cardElement
+}
+
+const section = new Section(
+    {
+        renderItems: (data) => {
+            section.addItem(createCard(data))
+        },
+    },
+    cardListSection
+)
+
 api.getAppInfo()
-    .then((res) => {
-        userInfo.setUserInfo(res[0])
-        addCards.renderItem(res[1])
+    .then(res => {
+        const [{ name, about, avatar, _id }, cardData] = res
+
+        userInfo.setUserInfo({ name, about, avatar, _id })
+        userId = _id
+
+        section.renderItems(cardData)
     })
-    .catch((err) => console.log(err))
 
-//-------------------------------------------------------------------------------
-//-----Настраиваем попапы
-//-------------------------------------------------------------------------------
-
-//  Попап открытия картинки
-export const openCardImagePopup = new PopupWithImage('.popup__open-img')
-openCardImagePopup.setEventListeners()
-
-//Попап с формой создания карточки
-//создаём класс попапа
 export const createCardPopup = new PopupWithForm(
     '.popup__card',
     (inputsValues) => {
         api.newPostCard(inputsValues)
             .then((res) => {
-                addCards.renderItem(res)
+                section.renderItems(res)
                 createCardPopup.close()
             })
             .catch((err) => console.log(err))
@@ -96,6 +96,10 @@ export const createCardPopup = new PopupWithForm(
             })
     }
 )
+
+//  Попап открытия картинки
+export const openCardImagePopup = new PopupWithImage('.popup__open-img')
+openCardImagePopup.setEventListeners()
 
 //  Вешаем лиссенеры на инпуты формы
 createCardPopup.setEventListeners()
