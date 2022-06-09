@@ -1,6 +1,6 @@
 .card__heart {
     background-image: url(../../../images/heart.svg);
-    background-color: #fff;
+    background-color: transparent;
     background-repeat: no-repeat;
     background-size: cover;
     width: 22px;
